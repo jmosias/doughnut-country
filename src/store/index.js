@@ -15,11 +15,17 @@ export default createStore({
   mutations: {
     updateFlavours: (state, value) => (state.flavours = value),
     updateBoxes: (state, value) => (state.boxes = value),
-    addNewBox: (state) => {
+    addNewBox: (state, value = []) => {
       const box = {
-        value: []
+        value: value
       };
-      state.boxes.push(box);
+      state.boxes.splice(state.currentBoxIndex+1, 0, box);
+    },
+    clearBox: (state) => {
+      state.boxes[state.currentBoxIndex].value = [];
+    },
+    removeBox: (state) => {
+      state.boxes.splice(state.currentBoxIndex, 1);
     },
     changeCurrentBoxIndex: (state, direction) => {
       if(direction == "previous") {

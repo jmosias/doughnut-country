@@ -32,6 +32,30 @@
         <img :src="element.img" :alt="element.name" class="doughnut-icon" />
       </div>
     </template>
+    <template #footer v-if="index == currentBoxIndex">
+      <div>
+        <p>Box {{ index + 1 }}</p>
+        <button
+          @click="cloneBox"
+          class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+        >
+          Clone
+        </button>
+        <button
+          @click="clearBox"
+          class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Clear
+        </button>
+        <button
+          @click="removeBox"
+          :disabled="isLastBox"
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+        >
+          Remove
+        </button>
+      </div>
+    </template>
   </draggable>
 
   <button
@@ -90,11 +114,38 @@ export default {
       store.commit('changeCurrentBoxIndex', 'next');
     }
 
-    return { addFlavour, addBox, previousBox, nextBox };
+    function cloneBox() {
+      const box = store.state.boxes[store.state.currentBoxIndex];
+      store.commit('addNewBox', box.value);
+    }
+
+    function clearBox() {
+      store.commit('clearBox');
+    }
+
+    function removeBox() {
+      store.commit('removeBox');
+      if (store.state.currentBoxIndex == store.state.boxes.length) {
+        store.commit('changeCurrentBoxIndex', 'previous');
+      }
+    }
+
+    return {
+      addFlavour,
+      addBox,
+      previousBox,
+      nextBox,
+      cloneBox,
+      clearBox,
+      removeBox,
+    };
   },
   computed: {
     currentBoxIndex() {
       return this.$store.state.currentBoxIndex;
+    },
+    isLastBox() {
+      return this.$store.state.boxes.length == 1 ? true : false;
     },
     flavours: {
       get() {
