@@ -6,22 +6,40 @@ import image12 from '../assets/12.png';
 export default createStore({
   state: {
     flavours: [
-      { name: 'Honey Glazed', id: uuidv4(), img: image1 },
-      { name: 'Smores', id: uuidv4(), img: image12 },
+      { name: "Honey Glazed", id: uuidv4(), img: image1 },
+      { name: "Smores", id: uuidv4(), img: image12 },
     ],
-    box: [],
+    boxes: [],
+    currentBoxIndex: 0
   },
   mutations: {
     updateFlavours: (state, value) => (state.flavours = value),
-    updateBox: (state, box) => (state.box = box),
-    addNewFlavour: (state, { newIndex, flavour }) => {
+    updateBoxes: (state, value) => (state.boxes = value),
+    addNewBox: (state) => {
+      const box = {
+        value: []
+      };
+      state.boxes.push(box);
+    },
+    changeCurrentBoxIndex: (state, direction) => {
+      if(direction == "previous") {
+        if(state.currentBoxIndex > 0) {
+          state.currentBoxIndex -= 1;
+        }
+      } else if(direction == "next") {
+        if(state.currentBoxIndex < state.boxes.length-1) {
+          state.currentBoxIndex += 1;
+        }
+      }
+    },
+    addFlavourToBox: (state, {index, flavour}) => {
       const newFlavour = {
         name: flavour.name,
         id: uuidv4(),
-        img: flavour.img,
-      };
-      state.box[newIndex] = newFlavour;
-    },
+        img: flavour.img
+      }
+      state.boxes[state.currentBoxIndex].value[index] = newFlavour;
+    }
   },
   actions: {
   },
