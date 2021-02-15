@@ -1,7 +1,9 @@
 <template>
   <h3>Flavours</h3>
   <draggable
-    v-model="flavours"
+    v-for="(flavour, index) in flavours"
+    :key="index"
+    v-model="flavour.value"
     :group="{ name: 'doughnuts', pull: 'clone', put: false }"
     :sort="false"
     item-key="flavours"
@@ -11,6 +13,15 @@
       <div>
         <img :src="element.img" :alt="element.name" class="doughnut-icon" />
       </div>
+    </template>
+    <template #footer>
+      {{ flavour.value[0].name }}
+      <button
+        @click="addToBoxButton(flavour.value[0])"
+        class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded"
+      >
+        Add
+      </button>
     </template>
   </draggable>
 
@@ -102,6 +113,11 @@ export default {
       }
     }
 
+    function addToBoxButton(flavour) {
+      const index = store.state.boxes[store.state.currentBoxIndex].value.length;
+      store.commit('addFlavourToBox', { index, flavour });
+    }
+
     function addBox() {
       store.commit('addNewBox');
     }
@@ -132,6 +148,7 @@ export default {
 
     return {
       addFlavour,
+      addToBoxButton,
       addBox,
       previousBox,
       nextBox,

@@ -6,9 +6,13 @@ import image12 from '../assets/12.png';
 export default createStore({
   state: {
     flavours: [
-      { name: "Honey Glazed", id: uuidv4(), img: image1 },
-      { name: "Smores", id: uuidv4(), img: image12 },
+      { value: [{ name: "Honey Glazed", id: uuidv4(), img: image1 }] },
+      { value: [{ name: "Smores", id: uuidv4(), img: image12 }] },
     ],
+    // flavours: [
+    //   { name: "Honey Glazed", id: uuidv4(), img: image1 },
+    //   { name: "Smores", id: uuidv4(), img: image12 },
+    // ],
     boxes: [],
     currentBoxIndex: 0
   },
