@@ -37,6 +37,8 @@
     ghost-class="doughnut-icon-ghost"
     class="flex doughnut-box"
     :class="{ active: index == currentBoxIndex }"
+    @start="isTrashOpen = true"
+    @end="isTrashOpen = false"
   >
     <template #item="{ element }">
       <div>
@@ -69,6 +71,18 @@
     </template>
   </draggable>
 
+  <h3>Trash</h3>
+  <draggable
+    v-if="isTrashOpen"
+    v-model="trash.value"
+    :group="{ name: 'doughnuts' }"
+    @change="emptyTrash"
+    item-key="trash"
+    class="flex doughnut-box"
+  >
+    <template #item> </template>
+  </draggable>
+
   <button
     @click="addBox"
     class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
@@ -92,6 +106,7 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 import draggable from 'vuedraggable';
 import { useStore } from 'vuex';
 
@@ -102,7 +117,13 @@ export default {
   },
   setup() {
     const store = useStore();
-    store;
+
+    const trash = ref([]);
+    const isTrashOpen = ref(false);
+
+    function emptyTrash() {
+      trash.value = [];
+    }
 
     function addFlavour({ added }) {
       if (added) {
@@ -147,6 +168,9 @@ export default {
     }
 
     return {
+      trash,
+      isTrashOpen,
+      emptyTrash,
       addFlavour,
       addToBoxButton,
       addBox,

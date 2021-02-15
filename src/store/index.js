@@ -9,10 +9,6 @@ export default createStore({
       { value: [{ name: "Honey Glazed", id: uuidv4(), img: image1 }] },
       { value: [{ name: "Smores", id: uuidv4(), img: image12 }] },
     ],
-    // flavours: [
-    //   { name: "Honey Glazed", id: uuidv4(), img: image1 },
-    //   { name: "Smores", id: uuidv4(), img: image12 },
-    // ],
     boxes: [],
     currentBoxIndex: 0
   },
