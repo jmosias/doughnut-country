@@ -1,24 +1,13 @@
-# doughnut-country
+# Doughnut Country
 
-## Project setup
-```
-npm install
-```
+**Doughnut country is a work-in-progress**
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+You can visit the deployed web app here:
+https://doughnut-country.netlify.app/
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Summary
+Fill your doughnut and coffee cravings with Doughnut Country! 
 
-### Lints and fixes files
-```
-npm run lint
-```
+This web app is an online ordering system made for Doughnut Country. It can also be used by the business owner to change the catalogue items and its prices. 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+It features a customized drag and drop order system for flavoured doughnuts.
