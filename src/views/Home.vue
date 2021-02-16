@@ -1,16 +1,16 @@
 <template>
   <div class="home">
-    <doughnut-overlay />
+    <menu-doughnuts></menu-doughnuts>
   </div>
 </template>
 
 <script>
-import DoughnutOverlay from '../components/DoughnutOverlay.vue';
+import MenuDoughnuts from '../components/MenuDoughnuts.vue';
 
 export default {
   name: 'Home',
   components: {
-    DoughnutOverlay,
+    MenuDoughnuts,
   },
 };
 </script>
