@@ -30,13 +30,13 @@
     v-for="(box, index) in boxes"
     :key="index"
     v-model="box.value"
-    :group="{ name: 'doughnuts', put: isBoxFillable(index) }"
-    :disabled="!isCurrentIndex(index)"
+    :group="{ name: 'doughnuts', put: index == currentBoxIndex }"
+    :disabled="!index == currentBoxIndex"
     @change="addFlavour"
     item-key="box"
     ghost-class="doughnut-icon-ghost"
     class="flex doughnut-box"
-    :class="{ active: isCurrentIndex(index) }"
+    :class="{ active: index == currentBoxIndex }"
     @start="isTrashOpen = true"
     @end="isTrashOpen = false"
   >
@@ -45,20 +45,9 @@
         <img :src="element.img" :alt="element.name" class="doughnut-icon" />
       </div>
     </template>
-    <template #footer v-if="isCurrentIndex(index)">
+    <template #footer v-if="index == currentBoxIndex">
       <div>
         <p>Box {{ index + 1 }}</p>
-        <select id="boxSizes" v-model.number="currentBoxSize">
-          <option disabled>---</option>
-          <option
-            v-for="(boxSize, index) in boxSizes"
-            :key="index"
-            :value="boxSize"
-            :selected="boxSize == currentBoxSize"
-          >
-            {{ boxSize }}
-          </option>
-        </select>
         <button
           @click="cloneBox"
           class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
@@ -136,18 +125,6 @@ export default {
       trash.value = [];
     }
 
-    function isCurrentIndex(index) {
-      return index == store.state.currentBoxIndex;
-    }
-
-    function isBoxFillable(index) {
-      let b =
-        index == store.state.currentBoxIndex &&
-        store.state.boxes[store.state.currentBoxIndex].value.length <
-          store.state.boxes[store.state.currentBoxIndex].size;
-      return b;
-    }
-
     function addFlavour({ added }) {
       if (added) {
         store.commit('addFlavourToBox', {
@@ -158,14 +135,8 @@ export default {
     }
 
     function addToBoxButton(flavour) {
-      const b =
-        store.state.boxes[store.state.currentBoxIndex].value.length <
-        store.state.boxes[store.state.currentBoxIndex].size;
-      if (b) {
-        const index =
-          store.state.boxes[store.state.currentBoxIndex].value.length;
-        store.commit('addFlavourToBox', { index, flavour });
-      }
+      const index = store.state.boxes[store.state.currentBoxIndex].value.length;
+      store.commit('addFlavourToBox', { index, flavour });
     }
 
     function addBox() {
@@ -200,8 +171,6 @@ export default {
       trash,
       isTrashOpen,
       emptyTrash,
-      isCurrentIndex,
-      isBoxFillable,
       addFlavour,
       addToBoxButton,
       addBox,
@@ -213,22 +182,11 @@ export default {
     };
   },
   computed: {
-    boxSizes() {
-      return this.$store.state.boxSizes;
-    },
     currentBoxIndex() {
       return this.$store.state.currentBoxIndex;
     },
     isLastBox() {
       return this.$store.state.boxes.length == 1 ? true : false;
-    },
-    currentBoxSize: {
-      get() {
-        return this.$store.state.boxes[this.$store.state.currentBoxIndex].size;
-      },
-      set(value) {
-        this.$store.commit('changeBoxSize', value);
-      },
     },
     flavours: {
       get() {
@@ -246,6 +204,9 @@ export default {
         this.$store.commit('updateBoxes', value);
       },
     },
+  },
+  created() {
+    this.$store.commit('addNewBox');
   },
 };
 </script>

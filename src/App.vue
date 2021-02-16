@@ -6,13 +6,5 @@
   <router-view />
 </template>
 
-<script>
-export default {
-  created() {
-    this.$store.commit('addNewBox');
-  },
-};
-</script>
-
 <style>
 </style>

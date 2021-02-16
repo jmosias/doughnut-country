@@ -10,16 +10,14 @@ export default createStore({
       { value: [{ name: "Smores", id: uuidv4(), img: image12 }] },
     ],
     boxes: [],
-    currentBoxIndex: 0,
-    boxSizes: [6, 12]
+    currentBoxIndex: 0
   },
   mutations: {
     updateFlavours: (state, value) => (state.flavours = value),
     updateBoxes: (state, value) => (state.boxes = value),
     addNewBox: (state, value = []) => {
       const box = {
-        value: value,
-        size: 12
+        value: value
       };
       state.boxes.splice(state.currentBoxIndex+1, 0, box);
     },
@@ -47,10 +45,6 @@ export default createStore({
         img: flavour.img
       }
       state.boxes[state.currentBoxIndex].value[index] = newFlavour;
-    },
-    changeBoxSize: (state, newSize) => {
-      console.log(newSize);
-      state.boxes[state.currentBoxIndex].size = newSize;
     }
   },
   actions: {
