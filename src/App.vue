@@ -9,7 +9,7 @@
 <script>
 export default {
   created() {
-    this.$store.commit('addNewBox');
+    this.$store.commit('doughnuts/ADD_NEW_BOX');
   },
 };
 </script>

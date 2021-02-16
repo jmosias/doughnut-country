@@ -27,7 +27,7 @@
 
   <h3>Boxes</h3>
   <draggable
-    v-for="(box, index) in boxes"
+    v-for="(box, index) in doughnutBoxes"
     :key="index"
     v-model="box.value"
     :group="{ name: 'doughnuts', put: isBoxFillable(index) }"
@@ -48,15 +48,15 @@
     <template #footer v-if="isCurrentIndex(index)">
       <div>
         <p>Box {{ index + 1 }}</p>
-        <select id="boxSizes" v-model.number="currentBoxSize">
+        <select id="boxesCapacities" v-model.number="currentBoxCapacity">
           <option disabled>---</option>
           <option
-            v-for="(boxSize, index) in boxSizes"
+            v-for="(boxCapacity, index) in boxesCapacities"
             :key="index"
-            :value="boxSize"
-            :selected="boxSize == currentBoxSize"
+            :value="boxCapacity"
+            :selected="boxCapacity == currentBoxCapacity"
           >
-            {{ boxSize }}
+            {{ boxCapacity }}
           </option>
         </select>
         <button
@@ -95,7 +95,7 @@
   </draggable>
 
   <button
-    @click="addBox"
+    @click="addNewBox"
     class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
   >
     Add
@@ -117,133 +117,106 @@
 </template>
 
 <script>
-import { ref } from 'vue';
 import draggable from 'vuedraggable';
-import { useStore } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   name: 'DoughnutOverlay',
   components: {
     draggable,
   },
-  setup() {
-    const store = useStore();
-
-    const trash = ref([]);
-    const isTrashOpen = ref(false);
-
-    function emptyTrash() {
-      trash.value = [];
-    }
-
-    function isCurrentIndex(index) {
-      return index == store.state.currentBoxIndex;
-    }
-
-    function isBoxFillable(index) {
-      let b =
-        index == store.state.currentBoxIndex &&
-        store.state.boxes[store.state.currentBoxIndex].value.length <
-          store.state.boxes[store.state.currentBoxIndex].size;
-      return b;
-    }
-
-    function addFlavour({ added }) {
+  data() {
+    return {
+      trash: [],
+      isTrashOpen: false,
+    };
+  },
+  methods: {
+    ...mapMutations('doughnuts', [
+      'SET_BOXES',
+      'ADD_NEW_BOX',
+      'CLEAR_BOXES_CURRENT_BOX',
+      'REMOVE_BOXES_CURRENT_BOX',
+      'SET_BOXES_CURRENT_BOX_INDEX',
+      'ADD_FLAVOUR',
+      'SET_CURRENT_BOX_CAPACITY',
+    ]),
+    emptyTrash() {
+      this.trash.value = [];
+    },
+    isCurrentIndex(index) {
+      return index == this.boxesCurrentBoxIndex;
+    },
+    isBoxFillable(index) {
+      return (
+        index == this.boxesCurrentBoxIndex &&
+        this.currentBox.value.length < this.currentBox.capacity
+      );
+    },
+    addFlavour({ added }) {
       if (added) {
-        store.commit('addFlavourToBox', {
+        this.ADD_FLAVOUR({
           index: added.newIndex,
           flavour: added.element,
         });
       }
-    }
-
-    function addToBoxButton(flavour) {
-      const b =
-        store.state.boxes[store.state.currentBoxIndex].value.length <
-        store.state.boxes[store.state.currentBoxIndex].size;
-      if (b) {
-        const index =
-          store.state.boxes[store.state.currentBoxIndex].value.length;
-        store.commit('addFlavourToBox', { index, flavour });
+    },
+    addToBoxButton(flavour) {
+      const bool = this.currentBox.value.length < this.currentBox.capacity;
+      if (bool) {
+        const index = this.currentBox.value.length;
+        this.ADD_FLAVOUR({ index, flavour });
       }
-    }
-
-    function addBox() {
-      store.commit('addNewBox');
-    }
-
-    function previousBox() {
-      store.commit('changeCurrentBoxIndex', 'previous');
-    }
-
-    function nextBox() {
-      store.commit('changeCurrentBoxIndex', 'next');
-    }
-
-    function cloneBox() {
-      const box = store.state.boxes[store.state.currentBoxIndex];
-      store.commit('addNewBox', box.value);
-    }
-
-    function clearBox() {
-      store.commit('clearBox');
-    }
-
-    function removeBox() {
-      store.commit('removeBox');
-      if (store.state.currentBoxIndex == store.state.boxes.length) {
-        store.commit('changeCurrentBoxIndex', 'previous');
+    },
+    addNewBox() {
+      this.ADD_NEW_BOX();
+    },
+    previousBox() {
+      this.SET_BOXES_CURRENT_BOX_INDEX('previous');
+    },
+    nextBox() {
+      this.SET_BOXES_CURRENT_BOX_INDEX('next');
+    },
+    cloneBox() {
+      this.ADD_NEW_BOX(this.currentBox.value);
+    },
+    clearBox() {
+      this.CLEAR_BOXES_CURRENT_BOX();
+    },
+    removeBox() {
+      this.REMOVE_BOXES_CURRENT_BOX();
+      if (this.boxesCurrentBoxIndex == this.boxes.length) {
+        this.SET_BOXES_CURRENT_BOX_INDEX('previous');
       }
-    }
-
-    return {
-      trash,
-      isTrashOpen,
-      emptyTrash,
-      isCurrentIndex,
-      isBoxFillable,
-      addFlavour,
-      addToBoxButton,
-      addBox,
-      previousBox,
-      nextBox,
-      cloneBox,
-      clearBox,
-      removeBox,
-    };
+    },
   },
   computed: {
-    boxSizes() {
-      return this.$store.state.boxSizes;
-    },
-    currentBoxIndex() {
-      return this.$store.state.currentBoxIndex;
-    },
+    ...mapState('doughnuts', [
+      'flavours',
+      'boxes',
+      'boxesCurrentBoxIndex',
+      'boxesCapacities',
+    ]),
     isLastBox() {
-      return this.$store.state.boxes.length == 1 ? true : false;
+      return this.boxes.length == 1 ? true : false;
     },
-    currentBoxSize: {
+    currentBox() {
+      return this.boxes[this.boxesCurrentBoxIndex];
+    },
+    currentBoxCapacity: {
       get() {
-        return this.$store.state.boxes[this.$store.state.currentBoxIndex].size;
+        return this.currentBox.capacity;
       },
       set(value) {
-        this.$store.commit('changeBoxSize', value);
+        this.SET_CURRENT_BOX_CAPACITY(value);
       },
     },
-    flavours: {
+    doughnutBoxes: {
       get() {
-        return this.$store.state.flavours;
+        return this.boxes;
       },
       set(value) {
-        this.$store.commit('updateFlavours', value);
-      },
-    },
-    boxes: {
-      get() {
-        return this.$store.state.boxes;
-      },
-      set(value) {
-        this.$store.commit('updateBoxes', value);
+        this.SET_BOXES(value);
       },
     },
   },
