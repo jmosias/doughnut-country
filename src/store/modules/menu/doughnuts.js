@@ -4,7 +4,7 @@ import image12 from '@/assets/12.png';
 
 const namespaced = true;
 
-const state = () => ({
+const state = {
   flavours: [
     { value: [{ name: 'Honey Glazed', id: uuidv4(), img: image1 }] },
     { value: [{ name: 'Smores', id: uuidv4(), img: image12 }] },
@@ -12,7 +12,7 @@ const state = () => ({
   boxes: [],
   boxesCurrentBoxIndex: 0,
   boxesCapacities: [6, 12]
-})
+}
 
 const mutations = {
   SET_FLAVOURS: (state, value) => (state.flavours = value),
