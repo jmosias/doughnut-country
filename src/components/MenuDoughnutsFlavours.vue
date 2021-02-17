@@ -1,29 +1,41 @@
 <template>
-  <h3>Flavours</h3>
-  <draggable
-    v-for="(flavour, index) in flavours"
-    :key="index"
-    v-model="flavour.value"
-    :group="{ name: 'doughnuts', pull: 'clone', put: false }"
-    :sort="false"
-    item-key="flavours"
-    class="flex flavours"
-  >
-    <template #item="{ element }">
-      <div>
-        <img :src="element.img" :alt="element.name" class="doughnut-icon" />
-      </div>
-    </template>
-    <template #footer>
-      {{ flavour.value[0].name }}
-      <button
-        @click="addToBoxButton(flavour.value[0])"
-        class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded"
+  <div class="w-1/2 p-6 bg-c-primary">
+    <h3 class="py-3 text-c-tertiary text-3xl font-extralight text-center">
+      Flavours
+    </h3>
+    <div class="flex flex-wrap">
+      <draggable
+        v-for="(flavour, index) in flavours"
+        :key="index"
+        v-model="flavour.value"
+        :group="{ name: 'doughnuts', pull: 'clone', put: false }"
+        :sort="false"
+        item-key="flavours"
+        class="box-border p-3 flex flex-col justify-center items-center w-1/5"
       >
-        Add
-      </button>
-    </template>
-  </draggable>
+        <template #item="{ element }">
+          <div>
+            <img
+              :src="element.img"
+              :alt="element.name"
+              class="max-doughnut-size cursor-pointer w-full h-auto"
+            />
+          </div>
+        </template>
+        <template #footer>
+          <p class="text-c-tertiary font-extralight text-center">
+            {{ flavour.value[0].name }}
+          </p>
+          <button
+            @click="addToBoxButton(flavour.value[0])"
+            class="bg-c-secondary hover:bg-opacity-80 text-c-tertiary font-bold py-1 px-3 rounded-lg text-xs uppercase"
+          >
+            Add
+          </button>
+        </template>
+      </draggable>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -54,9 +66,9 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
-.doughnut-icon {
-  @apply w-16 h-auto;
-  cursor: pointer;
+<style scoped>
+.max-doughnut-size {
+  max-width: 8rem;
+  max-height: 8rem;
 }
 </style>

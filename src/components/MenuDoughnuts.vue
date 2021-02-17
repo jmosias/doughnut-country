@@ -1,6 +1,8 @@
 <template>
-  <menu-doughnuts-flavours></menu-doughnuts-flavours>
-  <menu-doughnuts-boxes></menu-doughnuts-boxes>
+  <div class="flex h-screen">
+    <menu-doughnuts-boxes></menu-doughnuts-boxes>
+    <menu-doughnuts-flavours></menu-doughnuts-flavours>
+  </div>
 </template>
 
 <script>

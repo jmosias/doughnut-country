@@ -8,6 +8,19 @@ const state = {
   flavours: [
     { value: [{ name: 'Honey Glazed', id: uuidv4(), img: image1 }] },
     { value: [{ name: 'Smores', id: uuidv4(), img: image12 }] },
+    { value: [{ name: 'Honey Glazed', id: uuidv4(), img: image1 }] },
+    { value: [{ name: 'Smores', id: uuidv4(), img: image12 }] },
+    { value: [{ name: 'Honey Glazed', id: uuidv4(), img: image1 }] },
+    { value: [{ name: 'Smores', id: uuidv4(), img: image12 }] },
+    { value: [{ name: 'Honey Glazed', id: uuidv4(), img: image1 }] },
+    { value: [{ name: 'Smores', id: uuidv4(), img: image12 }] },
+    { value: [{ name: 'Honey Glazed', id: uuidv4(), img: image1 }] },
+    { value: [{ name: 'Smores', id: uuidv4(), img: image12 }] },
+    { value: [{ name: 'Honey Glazed', id: uuidv4(), img: image1 }] },
+    { value: [{ name: 'Smores', id: uuidv4(), img: image12 }] },
+    { value: [{ name: 'Honey Glazed', id: uuidv4(), img: image1 }] },
+    { value: [{ name: 'Smores', id: uuidv4(), img: image12 }] },
+    { value: [{ name: 'Honey Glazed', id: uuidv4(), img: image1 }] },
   ],
   boxes: [],
   boxesCurrentBoxIndex: 0,
@@ -39,6 +52,8 @@ const mutations = {
       if(state.boxesCurrentBoxIndex < state.boxes.length-1) {
         state.boxesCurrentBoxIndex += 1;
       }
+    } else {
+      state.boxesCurrentBoxIndex = direction;
     }
   },
   ADD_FLAVOUR: (state, {index, flavour}) => {

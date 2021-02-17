@@ -3,3 +3,13 @@
 @tailwind components;
 
 @tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-body text-c-black;
+  }
+
+  button {
+    @apply focus:outline-none;
+  }
+}
