@@ -13,15 +13,17 @@
     <div class="w-full flex flex-grow">
       <button
         @click="previousBox"
-        class="p-4 hover:opacity-80 text-c-primary font-bold"
+        class="p-4 hover:opacity-80 text-c-primary text-4xl"
       >
-        &lt;
+        <i class="fas fa-chevron-left"></i>
       </button>
 
       <div
         class="p-6 h-full flex flex-grow flex-col justify-between border border-dashed border-c-white rounded-xl gap-y-6"
       >
-        <div class="h-full flex justify-center items-center">
+        <div
+          class="h-full flex justify-center items-center border border-dashed border-c-primary rounded-xl"
+        >
           <draggable
             v-for="(box, index) in doughnutBoxes"
             :key="index"
@@ -34,13 +36,14 @@
             @end="isTrashOpen = false"
             v-show="isCurrentIndex(index)"
             ghost-class="ghost-doughnut"
-            class="w-full flex flex-wrap justify-center"
+            class="w-full h-full grid grid-cols-4 grid-rows-3 border border-dashed border-c-white rounded-xl"
           >
+            <!-- flex flex-wrap justify-center -->
             <template #item="{ element }">
               <img
                 :src="element.img"
                 :alt="element.name"
-                class="cursor-pointer w-1/4 h-auto"
+                class="cursor-pointer w-full h-auto border border-dashed border-c-primary rounded-xl"
               />
             </template>
           </draggable>
@@ -50,8 +53,11 @@
           <p class="text-c-white font-extralight text-center">
             Box no. {{ boxesCurrentBoxIndex + 1 }}
           </p>
-          <select id="boxesCapacities" v-model.number="currentBoxCapacity">
-            <option disabled>---</option>
+          <select
+            id="boxesCapacities"
+            v-model.number="currentBoxCapacity"
+            class="text-xs px-3"
+          >
             <option
               v-for="(boxCapacity, index) in boxesCapacities"
               :key="index"
@@ -61,35 +67,29 @@
               Box of {{ boxCapacity }}
             </option>
           </select>
-          <div class="flex">
-            <button
+          <div class="flex gap-x-4 items-center">
+            <i
               @click="cloneBox"
-              class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
-            >
-              Clone
-            </button>
-            <button
+              class="cursor-pointer fas fa-clone hover:opacity-80 text-yellow-400 text-lg"
+            ></i>
+            <i
               @click="clearBox"
-              class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Clear
-            </button>
-            <button
+              class="cursor-pointer fas fa-undo-alt hover:opacity-80 text-yellow-600 text-lg"
+            ></i>
+            <i
               @click="removeBox"
               :disabled="isLastBox"
-              class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
-            >
-              Remove
-            </button>
+              class="cursor-pointer fas fa-times hover:opacity-80 text-red-400 text-2xl disabled:opacity-40"
+            ></i>
           </div>
         </div>
       </div>
 
       <button
         @click="nextBox"
-        class="p-4 hover:opacity-80 text-c-primary font-bold"
+        class="p-4 hover:opacity-80 text-c-primary text-4xl"
       >
-        &gt;
+        <i class="fas fa-chevron-right"></i>
       </button>
     </div>
 
@@ -171,8 +171,13 @@ export default {
     },
     removeBox() {
       this.REMOVE_BOXES_CURRENT_BOX();
-      if (this.boxesCurrentBoxIndex == this.boxes.length) {
+      if (
+        this.boxesCurrentBoxIndex <= this.boxes.length &&
+        this.boxes.length !== 0
+      ) {
         this.SET_BOXES_CURRENT_BOX_INDEX('previous');
+      } else {
+        this.ADD_NEW_BOX();
       }
     },
   },
@@ -190,6 +195,7 @@ export default {
     },
     currentBoxCapacity: {
       get() {
+        console.log(this.currentBox);
         return this.currentBox.capacity;
       },
       set(value) {

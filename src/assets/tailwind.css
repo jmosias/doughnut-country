@@ -9,7 +9,7 @@
     @apply font-body text-c-black;
   }
 
-  button {
+  button, select {
     @apply focus:outline-none;
   }
 }

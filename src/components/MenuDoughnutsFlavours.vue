@@ -11,14 +11,14 @@
         :group="{ name: 'doughnuts', pull: 'clone', put: false }"
         :sort="false"
         item-key="flavours"
-        class="box-border p-3 flex flex-col justify-center items-center w-1/5"
+        class="box-border flex flex-col justify-center items-center w-1/5"
       >
         <template #item="{ element }">
-          <div>
+          <div class="doughnut-icon--scale">
             <img
               :src="element.img"
               :alt="element.name"
-              class="max-doughnut-size cursor-pointer w-full h-auto"
+              class="doughnut-icon cursor-pointer w-full h-auto"
             />
           </div>
         </template>
@@ -67,8 +67,17 @@ export default {
 </script>
 
 <style scoped>
-.max-doughnut-size {
+.doughnut-icon {
   max-width: 8rem;
   max-height: 8rem;
+}
+
+.doughnut-icon--scale {
+  padding: 0.5rem;
+  @apply transition-all;
+}
+
+.doughnut-icon--scale:hover {
+  padding: 0;
 }
 </style>
