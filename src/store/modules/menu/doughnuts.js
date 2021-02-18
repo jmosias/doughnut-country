@@ -66,6 +66,9 @@ const mutations = {
   },
   SET_CURRENT_BOX_CAPACITY: (state, capacity) => {
     state.boxes[state.boxesCurrentBoxIndex].capacity = capacity;
+  },
+  SET_CURRENT_BOX_LENGTH: (state, length) => {
+    state.boxes[state.boxesCurrentBoxIndex].value.length = length;
   }
 }
 

@@ -36,7 +36,11 @@
             @end="isTrashOpen = false"
             v-show="isCurrentIndex(index)"
             ghost-class="ghost-doughnut"
-            class="w-full h-full grid grid-cols-4 grid-rows-3 border border-dashed border-c-white rounded-xl"
+            class="w-4/5 h-4/5 items-center border border-dashed border-c-white rounded-xl"
+            :class="{
+              'box-cap-6': currentBoxCapacity == 6,
+              'box-cap-12': currentBoxCapacity == 12,
+            }"
           >
             <!-- flex flex-wrap justify-center -->
             <template #item="{ element }">
@@ -131,6 +135,7 @@ export default {
       'SET_BOXES_CURRENT_BOX_INDEX',
       'ADD_FLAVOUR',
       'SET_CURRENT_BOX_CAPACITY',
+      'SET_CURRENT_BOX_LENGTH',
     ]),
     emptyTrash() {
       this.trash.value = [];
@@ -211,6 +216,13 @@ export default {
       },
     },
   },
+  watch: {
+    currentBoxCapacity: function (newCapacity) {
+      if (this.currentBox.value.length > newCapacity) {
+        this.SET_CURRENT_BOX_LENGTH(newCapacity);
+      }
+    },
+  },
 };
 </script>
 
@@ -222,5 +234,13 @@ export default {
 
 .ghost-doughnut {
   @apply opacity-80;
+}
+
+.box-cap-6 {
+  @apply grid grid-cols-3 grid-rows-2;
+}
+
+.box-cap-12 {
+  @apply grid grid-cols-4 grid-rows-3;
 }
 </style>
