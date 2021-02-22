@@ -19,11 +19,9 @@
       </button>
 
       <div
-        class="p-6 h-full flex flex-grow flex-col justify-between border border-dashed border-c-white rounded-xl gap-y-6"
+        class="relative p-6 h-full flex flex-grow flex-col justify-between border border-dashed border-c-white rounded-xl gap-y-6"
       >
-        <div
-          class="h-full flex justify-center items-center border border-dashed border-c-primary rounded-xl"
-        >
+        <div class="h-full flex justify-center items-center">
           <draggable
             v-for="(box, index) in doughnutBoxes"
             :key="index"
@@ -36,25 +34,27 @@
             @end="isTrashOpen = false"
             v-show="isCurrentIndex(index)"
             ghost-class="ghost-doughnut"
-            class="w-4/5 h-4/5 items-center border border-dashed border-c-white rounded-xl"
+            class="w-4/5 h-4/5 items-center"
             :class="{
               'box-cap-6': currentBoxCapacity == 6,
               'box-cap-12': currentBoxCapacity == 12,
             }"
           >
-            <!-- flex flex-wrap justify-center -->
             <template #item="{ element }">
               <img
                 :src="element.img"
                 :alt="element.name"
-                class="cursor-pointer w-full h-auto border border-dashed border-c-primary rounded-xl"
+                class="cursor-pointer w-full h-auto"
               />
             </template>
           </draggable>
         </div>
 
         <div class="w-full flex justify-between items-center">
-          <p class="text-c-white font-extralight text-center">
+          <p
+            class="text-c-white font-extralight text-center"
+            :class="{ 'opacity-0': isTrashOpen }"
+          >
             Box no. {{ boxesCurrentBoxIndex + 1 }}
           </p>
           <select
@@ -74,18 +74,38 @@
           <div class="flex gap-x-4 items-center">
             <i
               @click="cloneBox"
-              class="cursor-pointer fas fa-clone hover:opacity-80 text-yellow-400 text-lg"
+              class="cursor-pointer fas fa-clone hover:opacity-80 text-c-pastel-yellow text-lg"
             ></i>
             <i
               @click="clearBox"
-              class="cursor-pointer fas fa-undo-alt hover:opacity-80 text-yellow-600 text-lg"
+              class="cursor-pointer fas fa-undo-alt hover:opacity-80 text-c-pastel-yellow text-lg"
             ></i>
             <i
               @click="removeBox"
               :disabled="isLastBox"
-              class="cursor-pointer fas fa-times hover:opacity-80 text-red-400 text-2xl disabled:opacity-40"
+              class="cursor-pointer fas fa-times hover:opacity-80 text-c-pastel-red text-2xl disabled:opacity-40"
             ></i>
           </div>
+        </div>
+
+        <div
+          v-if="isTrashOpen"
+          class="absolute bottom-6 left-6 w-1/5 h-1/5 flex justify-center items-center border border-dashed border-c-pastel-red rounded-xl"
+        >
+          <div class="absolute w-full h-full flex justify-center items-center">
+            <i class="fas fa-trash-alt text-c-pastel-red text-6xl"></i>
+          </div>
+
+          <draggable
+            v-model="trash.value"
+            :group="{ name: 'doughnuts' }"
+            @change="emptyTrash"
+            item-key="trash"
+            class="w-4/5 h-4/5"
+            ghost-class="ghost-doughnut"
+          >
+            <template #item> </template>
+          </draggable>
         </div>
       </div>
 
@@ -96,18 +116,6 @@
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>
-
-    <!-- <h3>Trash</h3> -->
-    <draggable
-      v-if="isTrashOpen"
-      v-model="trash.value"
-      :group="{ name: 'doughnuts' }"
-      @change="emptyTrash"
-      item-key="trash"
-      class="flex doughnut-box"
-    >
-      <template #item> </template>
-    </draggable>
   </div>
 </template>
 

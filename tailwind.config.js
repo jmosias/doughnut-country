@@ -11,7 +11,10 @@ module.exports = {
         'c-secondary': '#d8b98b',
         'c-tertiary': '#49240f',
         'c-black': '#131217',
-        'c-white': '#fff'
+        'c-white': '#fff',
+        'c-pastel-red': '#ffadad',
+        'c-pastel-orange': '#ffd6a5',
+        'c-pastel-yellow': '#fdffb6'
       }
     },
   },
