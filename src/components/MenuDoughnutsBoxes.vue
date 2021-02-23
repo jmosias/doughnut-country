@@ -44,7 +44,7 @@
               <img
                 :src="element.img"
                 :alt="element.name"
-                class="cursor-pointer w-full h-auto"
+                class="cursor-pointer w-full h-auto doughnut-icon--scale"
               />
             </template>
           </draggable>
@@ -250,5 +250,13 @@ export default {
 
 .box-cap-12 {
   @apply grid grid-cols-4 grid-rows-3;
+}
+
+.doughnut-icon--scale {
+  @apply p-2 transition-all;
+}
+
+.doughnut-icon--scale:hover {
+  @apply p-0;
 }
 </style>

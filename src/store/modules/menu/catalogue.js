@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import image12 from '@/assets/12.png';
+import image12 from '@/assets/images/doughnut_flavours/cappuccino.png';
 
 const namespaced = true;
 const state = {

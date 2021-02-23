@@ -1,9 +1,9 @@
 <template>
-  <div class="w-1/2 p-6 bg-c-primary">
+  <div class="w-1/2 p-6 bg-c-primary flex flex-col items-center gap-y-6">
     <h3 class="py-3 text-c-tertiary text-3xl font-extralight text-center">
       Flavours
     </h3>
-    <div class="flex flex-wrap">
+    <div class="flex-grow grid grid-cols-5 grid-rows-3 gap-2">
       <draggable
         v-for="(flavour, index) in flavours"
         :key="index"
@@ -11,16 +11,14 @@
         :group="{ name: 'doughnuts', pull: 'clone', put: false }"
         :sort="false"
         item-key="flavours"
-        class="box-border flex flex-col justify-center items-center w-1/5"
+        class="box-border flex flex-col justify-center items-center"
       >
         <template #item="{ element }">
-          <div class="doughnut-icon--scale">
-            <img
-              :src="element.img"
-              :alt="element.name"
-              class="doughnut-icon cursor-pointer w-full h-auto"
-            />
-          </div>
+          <img
+            :src="element.img"
+            :alt="element.name"
+            class="cursor-pointer w-full h-auto doughnut-icon--scale"
+          />
         </template>
         <template #footer>
           <p class="text-c-tertiary font-extralight text-center">
@@ -66,18 +64,12 @@ export default {
 };
 </script>
 
-<style scoped>
-.doughnut-icon {
-  max-width: 8rem;
-  max-height: 8rem;
-}
-
+<style lang="postcss" scoped>
 .doughnut-icon--scale {
-  padding: 0.5rem;
-  @apply transition-all;
+  @apply p-2 transition-all;
 }
 
 .doughnut-icon--scale:hover {
-  padding: 0;
+  @apply p-0;
 }
 </style>
