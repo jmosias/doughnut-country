@@ -16,7 +16,7 @@
         <template #item="{ element }">
           <img
             :src="element.img"
-            :alt="element.name"
+            :alt="element.name + ' Doughnut Flavour'"
             class="cursor-pointer w-full h-auto doughnut-icon--scale"
           />
         </template>

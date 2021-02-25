@@ -13,42 +13,65 @@
     <div class="w-full flex flex-grow">
       <button
         @click="previousBox"
-        class="p-4 hover:opacity-80 text-c-primary text-4xl"
+        class="prevArrow p-4 hover:opacity-80 text-c-primary text-4xl"
       >
         <i class="fas fa-chevron-left"></i>
       </button>
 
       <div
-        class="relative p-6 h-full flex flex-grow flex-col justify-between border border-dashed border-c-white rounded-xl gap-y-6"
+        class="overflow-hidden relative p-6 h-full flex flex-grow flex-col justify-between border border-dashed border-c-white rounded-xl gap-y-6"
       >
-        <div class="h-full flex justify-center items-center">
-          <draggable
-            v-for="(box, index) in doughnutBoxes"
-            :key="index"
-            v-model="box.value"
-            :group="{ name: 'doughnuts', put: isBoxFillable(index) }"
-            :disabled="!isCurrentIndex(index)"
-            @change="addFlavour"
-            item-key="box"
-            @start="isTrashOpen = true"
-            @end="isTrashOpen = false"
-            v-show="isCurrentIndex(index)"
-            ghost-class="ghost-doughnut"
-            class="w-4/5 h-4/5 items-center"
-            :class="{
-              'box-cap-6': currentBoxCapacity == 6,
-              'box-cap-12': currentBoxCapacity == 12,
-            }"
-          >
-            <template #item="{ element }">
-              <img
-                :src="element.img"
-                :alt="element.name"
-                class="cursor-pointer w-full h-auto doughnut-icon--scale"
-              />
-            </template>
-          </draggable>
-        </div>
+        <swiper
+          grabCursor
+          @swiper="setSwiperBoxes"
+          :allowSlideNext="true"
+          :allowSlidePrev="true"
+          :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
+          :slidesPerView="1"
+          :centeredSlides="true"
+          class="slider relative w-full h-full"
+        >
+          <div class="slider-navigation absolute top-0 z-10">
+            <button
+              @click="previousBox"
+              class="prevArrow p-4 hover:opacity-80 text-c-primary text-4xl"
+            >
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button
+              @click="nextBox"
+              class="nextArrow p-4 hover:opacity-80 text-c-primary text-4xl"
+            >
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+
+          <swiper-slide v-for="(box, index) in doughnutBoxes" :key="index">
+            <draggable
+              v-model="box.value"
+              :group="{ name: 'doughnuts', put: isBoxFillable(index) }"
+              :disabled="!isCurrentIndex(index)"
+              @change="addFlavour"
+              item-key="box"
+              @start="isTrashOpen = true"
+              @end="isTrashOpen = false"
+              ghost-class="ghost-doughnut"
+              class="w-full h-full items-center bg-c-white"
+              :class="{
+                'box-cap-6': currentBoxCapacity == 6,
+                'box-cap-12': currentBoxCapacity == 12,
+              }"
+            >
+              <template #item="{ element }">
+                <img
+                  :src="element.img"
+                  :alt="element.name"
+                  class="cursor-pointer w-full h-auto doughnut-icon--scale"
+                />
+              </template>
+            </draggable>
+          </swiper-slide>
+        </swiper>
 
         <div class="w-full flex justify-between items-center">
           <p
@@ -111,7 +134,7 @@
 
       <button
         @click="nextBox"
-        class="p-4 hover:opacity-80 text-c-primary text-4xl"
+        class="nextArrow p-4 hover:opacity-80 text-c-primary text-4xl"
       >
         <i class="fas fa-chevron-right"></i>
       </button>
@@ -120,6 +143,12 @@
 </template>
 
 <script>
+import SwiperCore, { Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/components/navigation/navigation.min.css';
+SwiperCore.use({ Navigation });
+
 import draggable from 'vuedraggable';
 import { mapMutations, mapState } from 'vuex';
 
@@ -127,9 +156,12 @@ export default {
   name: 'MenuDoughnutsBoxes',
   components: {
     draggable,
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
+      swiperBoxes: null,
       trash: [],
       isTrashOpen: false,
     };
@@ -145,6 +177,9 @@ export default {
       'SET_CURRENT_BOX_CAPACITY',
       'SET_CURRENT_BOX_LENGTH',
     ]),
+    setSwiperBoxes(swiper) {
+      this.swiperBoxes = swiper;
+    },
     emptyTrash() {
       this.trash.value = [];
     },
@@ -170,9 +205,11 @@ export default {
       this.SET_BOXES_CURRENT_BOX_INDEX(this.boxes.length - 1);
     },
     previousBox() {
+      this.swiperBoxes.slidePrev();
       this.SET_BOXES_CURRENT_BOX_INDEX('previous');
     },
     nextBox() {
+      this.swiperBoxes.slideNext();
       this.SET_BOXES_CURRENT_BOX_INDEX('next');
     },
     cloneBox() {
