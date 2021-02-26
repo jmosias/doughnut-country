@@ -47,7 +47,7 @@ const mutations = {
   ADD_NEW_BOX: (state, value = []) => {
     const box = {
       value: value,
-      capacity: 12
+      capacity: 6
     };
     state.boxes.splice(state.boxesCurrentBoxIndex+1, 0, box);
   },

@@ -17,7 +17,7 @@
           <img
             :src="element.img"
             :alt="element.name + ' Doughnut Flavour'"
-            class="cursor-pointer w-full h-auto doughnut-icon--scale"
+            class="cursor-pointer w-full h-auto doughnut-icon"
           />
         </template>
         <template #footer>
@@ -65,11 +65,16 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.doughnut-icon--scale {
-  @apply p-2 transition-all;
+.doughnut-icon {
+  @apply transition-all;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  padding: 6%;
 }
 
-.doughnut-icon--scale:hover {
-  @apply p-0;
+.doughnut-icon:hover {
+  padding: 0;
 }
 </style>
