@@ -22,30 +22,14 @@
         class="overflow-hidden relative p-6 h-full flex flex-grow flex-col justify-between border border-dashed border-c-white rounded-xl gap-y-6"
       >
         <swiper
-          grabCursor
           @swiper="setSwiperBoxes"
           :allowSlideNext="true"
           :allowSlidePrev="true"
-          :navigation="{ nextEl: '.nextArrow', prevEl: '.prevArrow' }"
+          :allowTouchMove="false"
           :slidesPerView="1"
           :centeredSlides="true"
           class="slider relative w-full h-full"
         >
-          <div class="slider-navigation absolute top-0 z-10">
-            <button
-              @click="previousBox"
-              class="prevArrow p-4 hover:opacity-80 text-c-primary text-4xl"
-            >
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button
-              @click="nextBox"
-              class="nextArrow p-4 hover:opacity-80 text-c-primary text-4xl"
-            >
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-
           <swiper-slide v-for="(box, index) in doughnutBoxes" :key="index">
             <draggable
               v-model="box.value"
@@ -143,14 +127,10 @@
 </template>
 
 <script>
-import SwiperCore, { Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/swiper-bundle.min.css';
-import 'swiper/components/navigation/navigation.min.css';
-SwiperCore.use({ Navigation });
-
 import draggable from 'vuedraggable';
 import { mapMutations, mapState } from 'vuex';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/swiper-bundle.min.css';
 
 export default {
   name: 'MenuDoughnutsBoxes',
@@ -202,19 +182,17 @@ export default {
     },
     addNewBox() {
       this.ADD_NEW_BOX();
-      this.SET_BOXES_CURRENT_BOX_INDEX(this.boxes.length - 1);
+      this.SET_BOXES_CURRENT_BOX_INDEX('next');
     },
     previousBox() {
-      this.swiperBoxes.slidePrev();
       this.SET_BOXES_CURRENT_BOX_INDEX('previous');
     },
     nextBox() {
-      this.swiperBoxes.slideNext();
       this.SET_BOXES_CURRENT_BOX_INDEX('next');
     },
     cloneBox() {
       this.ADD_NEW_BOX(this.currentBox.value);
-      this.SET_BOXES_CURRENT_BOX_INDEX(this.boxesCurrentBoxIndex + 1);
+      this.SET_BOXES_CURRENT_BOX_INDEX('next');
     },
     clearBox() {
       this.CLEAR_BOXES_CURRENT_BOX();
@@ -266,6 +244,14 @@ export default {
       if (this.currentBox.value.length > newCapacity) {
         this.SET_CURRENT_BOX_LENGTH(newCapacity);
       }
+    },
+    boxesCurrentBoxIndex: function () {
+      this.$nextTick(() => {
+        this.swiperBoxes.update();
+        this.$nextTick(() => {
+          this.swiperBoxes.slideTo(this.boxesCurrentBoxIndex);
+        });
+      });
     },
   },
 };
