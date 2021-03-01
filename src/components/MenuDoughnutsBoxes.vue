@@ -56,7 +56,7 @@
       </swiper>
 
       <div
-        class="z-10 absolute bottom-0 py-6 w-full flex justify-center items-center gap-x-16"
+        class="z-10 absolute bottom-0 p-6 w-full flex justify-center items-center gap-x-16"
       >
         <p class="text-c-white font-extralight text-center">
           Box no. {{ boxesCurrentBoxIndex + 1 }}
@@ -129,8 +129,6 @@ export default {
       'REMOVE_BOXES_CURRENT_BOX',
       'SET_BOXES_CURRENT_BOX_INDEX',
       'ADD_FLAVOUR',
-      'SET_CURRENT_BOX_CAPACITY',
-      'SET_CURRENT_BOX_LENGTH',
     ]),
     setSwiperBoxes(swiper) {
       this.swiperBoxes = swiper;
@@ -184,23 +182,13 @@ export default {
   computed: {
     ...mapState('doughnuts', [
       'boxes',
-      'boxesCurrentBoxIndex',
-      'boxesCapacities',
+      'boxesCurrentBoxIndex'
     ]),
     isLastBox() {
       return this.boxes.length == 1 ? true : false;
     },
     currentBox() {
       return this.boxes[this.boxesCurrentBoxIndex];
-    },
-    currentBoxCapacity: {
-      get() {
-        console.log(this.currentBox);
-        return this.currentBox.capacity;
-      },
-      set(value) {
-        this.SET_CURRENT_BOX_CAPACITY(value);
-      },
     },
     doughnutBoxes: {
       get() {
@@ -212,11 +200,6 @@ export default {
     },
   },
   watch: {
-    currentBoxCapacity: function (newCapacity) {
-      if (this.currentBox.value.length > newCapacity) {
-        this.SET_CURRENT_BOX_LENGTH(newCapacity);
-      }
-    },
     boxesCurrentBoxIndex: function () {
       this.$nextTick(() => {
         this.swiperBoxes.update();
