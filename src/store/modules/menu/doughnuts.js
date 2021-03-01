@@ -20,35 +20,31 @@ const state = {
     { value: [{ name: 'Nutella', id: uuidv4(), img: require('@/assets/images/doughnut_flavours/nutella.png') }] },
   ],
   boxes: [],
-  boxesCurrentBoxIndex: 0,
+  current_box_index: 0,
 }
 
 const mutations = {
-  SET_BOXES: (state, value) => (state.boxes = value),
+  SET_BOXES: (state, value) => state.boxes = value,
   ADD_NEW_BOX: (state, value = []) => {
     const box = {
       value: value,
       capacity: 6
     };
-    state.boxes.splice(state.boxesCurrentBoxIndex+1, 0, box);
+    state.boxes.splice(state.current_box_index+1, 0, box);
   },
-  CLEAR_BOXES_CURRENT_BOX: (state) => {
-    state.boxes[state.boxesCurrentBoxIndex].value = [];
-  },
-  REMOVE_BOXES_CURRENT_BOX: (state) => {
-    state.boxes.splice(state.boxesCurrentBoxIndex, 1);
-  },
-  SET_BOXES_CURRENT_BOX_INDEX: (state, direction) => {
+  CLEAR_CURRENT_BOX: (state) => state.boxes[state.current_box_index].value = [],
+  REMOVE_CURRENT_BOX: (state) => state.boxes.splice(state.current_box_index, 1),
+  SET_CURRENT_BOX_INDEX: (state, direction) => {
     if(direction == 'previous') {
-      if(state.boxesCurrentBoxIndex > 0) {
-        state.boxesCurrentBoxIndex -= 1;
+      if(state.current_box_index > 0) {
+        state.current_box_index -= 1;
       }
     } else if(direction == 'next') {
-      if(state.boxesCurrentBoxIndex < state.boxes.length-1) {
-        state.boxesCurrentBoxIndex += 1;
+      if(state.current_box_index < state.boxes.length-1) {
+        state.current_box_index += 1;
       }
     } else {
-      state.boxesCurrentBoxIndex = direction;
+      state.current_box_index = direction;
     }
   },
   ADD_FLAVOUR: (state, {index, flavour}) => {
@@ -57,7 +53,7 @@ const mutations = {
       id: uuidv4(),
       img: flavour.img
     }
-    state.boxes[state.boxesCurrentBoxIndex].value[index] = newFlavour;
+    state.boxes[state.current_box_index].value[index] = newFlavour;
   }
 }
 

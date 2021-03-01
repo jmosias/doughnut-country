@@ -48,18 +48,15 @@ export default {
   methods: {
     ...mapMutations('doughnuts', ['ADD_FLAVOUR']),
     addToBoxButton(flavour) {
-      const bool = this.currentBox.value.length < this.currentBox.capacity;
-      if (bool) {
-        const index = this.currentBox.value.length;
-        this.ADD_FLAVOUR({ index, flavour });
+      const currentBox = this.boxes[this.current_box_index];
+      const length = currentBox.value.length;
+      if ( length < currentBox.capacity) {
+        this.ADD_FLAVOUR({ length, flavour });
       }
     },
   },
   computed: {
-    ...mapState('doughnuts', ['flavours', 'boxes', 'boxesCurrentBoxIndex']),
-    currentBox() {
-      return this.boxes[this.boxesCurrentBoxIndex];
-    },
+    ...mapState('doughnuts', ['flavours', 'boxes', 'current_box_index'])
   },
 };
 </script>

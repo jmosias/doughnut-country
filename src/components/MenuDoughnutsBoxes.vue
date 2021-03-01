@@ -59,7 +59,7 @@
         class="z-10 absolute bottom-0 p-6 w-full flex justify-center items-center gap-x-16"
       >
         <p class="text-c-white font-extralight text-center">
-          Box no. {{ boxesCurrentBoxIndex + 1 }}
+          Box no. {{ current_box_index + 1 }}
         </p>
         <div class="flex gap-x-4 items-center">
           <i
@@ -125,9 +125,9 @@ export default {
     ...mapMutations('doughnuts', [
       'SET_BOXES',
       'ADD_NEW_BOX',
-      'CLEAR_BOXES_CURRENT_BOX',
-      'REMOVE_BOXES_CURRENT_BOX',
-      'SET_BOXES_CURRENT_BOX_INDEX',
+      'CLEAR_CURRENT_BOX',
+      'REMOVE_CURRENT_BOX',
+      'SET_CURRENT_BOX_INDEX',
       'ADD_FLAVOUR',
     ]),
     setSwiperBoxes(swiper) {
@@ -137,11 +137,11 @@ export default {
       this.trash.value = [];
     },
     isCurrentIndex(index) {
-      return index == this.boxesCurrentBoxIndex;
+      return index == this.current_box_index;
     },
     isBoxFillable(index) {
       return (
-        index == this.boxesCurrentBoxIndex &&
+        index == this.current_box_index &&
         this.currentBox.value.length < this.currentBox.capacity
       );
     },
@@ -155,25 +155,25 @@ export default {
     },
     addNewBox() {
       this.ADD_NEW_BOX();
-      this.SET_BOXES_CURRENT_BOX_INDEX('next');
+      this.SET_CURRENT_BOX_INDEX('next');
     },
     changeBox(index) {
-      this.SET_BOXES_CURRENT_BOX_INDEX(index);
+      this.SET_CURRENT_BOX_INDEX(index);
     },
     cloneBox() {
       this.ADD_NEW_BOX(this.currentBox.value);
-      this.SET_BOXES_CURRENT_BOX_INDEX('next');
+      this.SET_CURRENT_BOX_INDEX('next');
     },
     clearBox() {
-      this.CLEAR_BOXES_CURRENT_BOX();
+      this.CLEAR_CURRENT_BOX();
     },
     removeBox() {
-      this.REMOVE_BOXES_CURRENT_BOX();
+      this.REMOVE_CURRENT_BOX();
       if (
-        this.boxesCurrentBoxIndex <= this.boxes.length &&
+        this.current_box_index <= this.boxes.length &&
         this.boxes.length !== 0
       ) {
-        this.SET_BOXES_CURRENT_BOX_INDEX('previous');
+        this.SET_CURRENT_BOX_INDEX('previous');
       } else {
         this.ADD_NEW_BOX();
       }
@@ -182,13 +182,13 @@ export default {
   computed: {
     ...mapState('doughnuts', [
       'boxes',
-      'boxesCurrentBoxIndex'
+      'current_box_index'
     ]),
     isLastBox() {
       return this.boxes.length == 1 ? true : false;
     },
     currentBox() {
-      return this.boxes[this.boxesCurrentBoxIndex];
+      return this.boxes[this.current_box_index];
     },
     doughnutBoxes: {
       get() {
@@ -200,11 +200,11 @@ export default {
     },
   },
   watch: {
-    boxesCurrentBoxIndex: function () {
+    current_box_index: function () {
       this.$nextTick(() => {
         this.swiperBoxes.update();
         this.$nextTick(() => {
-          this.swiperBoxes.slideTo(this.boxesCurrentBoxIndex);
+          this.swiperBoxes.slideTo(this.current_box_index);
         });
       });
     },
