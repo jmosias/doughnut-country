@@ -47,13 +47,13 @@ const mutations = {
       state.current_box_index = direction;
     }
   },
-  ADD_FLAVOUR: (state, {index, flavour}) => {
+  ADD_FLAVOUR: (state, {length, flavour}) => {
     const newFlavour = {
       name: flavour.name,
       id: uuidv4(),
       img: flavour.img
     }
-    state.boxes[state.current_box_index].value[index] = newFlavour;
+    state.boxes[state.current_box_index].value[length] = newFlavour;
   }
 }
 

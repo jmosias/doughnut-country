@@ -180,10 +180,7 @@ export default {
     },
   },
   computed: {
-    ...mapState('doughnuts', [
-      'boxes',
-      'current_box_index'
-    ]),
+    ...mapState('doughnuts', ['boxes', 'current_box_index']),
     isLastBox() {
       return this.boxes.length == 1 ? true : false;
     },
@@ -250,7 +247,7 @@ export default {
 }
 
 .ghost-doughnut {
-  @apply opacity-80;
+  @apply opacity-60;
 }
 
 .doughnut-icon {

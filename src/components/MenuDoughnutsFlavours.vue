@@ -12,6 +12,7 @@
         :sort="false"
         item-key="flavours"
         class="box-border flex flex-col justify-center items-center"
+        ghost-class="ghost-doughnut"
       >
         <template #item="{ element }">
           <img
@@ -50,13 +51,13 @@ export default {
     addToBoxButton(flavour) {
       const currentBox = this.boxes[this.current_box_index];
       const length = currentBox.value.length;
-      if ( length < currentBox.capacity) {
+      if (length < currentBox.capacity) {
         this.ADD_FLAVOUR({ length, flavour });
       }
     },
   },
   computed: {
-    ...mapState('doughnuts', ['flavours', 'boxes', 'current_box_index'])
+    ...mapState('doughnuts', ['flavours', 'boxes', 'current_box_index']),
   },
 };
 </script>
@@ -73,5 +74,9 @@ export default {
 
 .doughnut-icon:hover {
   padding: 0;
+}
+
+.ghost-doughnut {
+  @apply opacity-60;
 }
 </style>
