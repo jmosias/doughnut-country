@@ -18,7 +18,7 @@
           <img
             :src="element.img"
             :alt="element.name + ' Doughnut Flavour'"
-            class="cursor-pointer w-full h-auto doughnut-icon"
+            class="doughnut-icon w-full h-auto"
           />
         </template>
         <template #footer>
@@ -27,7 +27,7 @@
           </p>
           <button
             @click="addToBoxButton(flavour.value[0])"
-            class="bg-c-secondary hover:bg-opacity-80 text-c-tertiary font-bold py-1 px-3 rounded-lg text-xs uppercase"
+            class="btn-add bg-c-secondary text-c-tertiary font-bold py-1 px-3 rounded-lg text-xs uppercase"
           >
             Add
           </button>
@@ -70,6 +70,9 @@ export default {
   -webkit-user-select: none;
   -ms-user-select: none;
   padding: 6%;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
 }
 
 .doughnut-icon:hover {
@@ -77,6 +80,14 @@ export default {
 }
 
 .ghost-doughnut {
-  @apply opacity-60;
+  @apply opacity-60 border border-dashed border-c-tertiary;
+}
+
+.btn-add {
+  @apply transition-all;
+}
+
+.btn-add:hover {
+  @apply transform-gpu scale-110;
 }
 </style>

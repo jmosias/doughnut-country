@@ -47,7 +47,7 @@
                 <img
                   :src="element.img"
                   :alt="element.name"
-                  class="doughnut-icon cursor-pointer w-full h-auto"
+                  class="doughnut-icon w-full h-auto"
                 />
               </template>
             </draggable>
@@ -220,12 +220,12 @@ export default {
 }
 
 .slide-is-active {
-  @apply transform scale-150 transition-all duration-500;
+  @apply transform-gpu scale-150 transition-all duration-500;
 }
 
 .slide-not-active {
   opacity: 50%;
-  @apply cursor-pointer opacity-50 transform scale-50 transition-all;
+  @apply cursor-pointer opacity-50 transform-gpu scale-50 transition-all;
 }
 
 .slide-not-active:hover {
@@ -257,6 +257,9 @@ export default {
   -webkit-user-select: none;
   -ms-user-select: none;
   padding: 8%;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
 }
 
 .doughnut-icon:hover {
@@ -266,7 +269,7 @@ export default {
 .doughnut-icon:nth-child(1),
 .doughnut-icon:nth-child(2),
 .doughnut-icon:nth-child(3) {
-  @apply transform;
+  @apply transform-gpu;
   --tw-scale-x: 0.98;
   --tw-scale-y: 0.98;
 }
@@ -274,24 +277,29 @@ export default {
 .doughnut-icon:nth-child(4),
 .doughnut-icon:nth-child(5),
 .doughnut-icon:nth-child(6) {
-  @apply transform;
+  @apply transform-gpu;
   --tw-scale-x: 1.13;
   --tw-scale-y: 1.13;
+  @apply -skew-x-6;
 }
 
 .doughnut-icon:nth-child(1) {
   --tw-translate-x: 8%;
+  @apply -skew-x-6 skew-y-3;
 }
 
 .doughnut-icon:nth-child(3) {
   --tw-translate-x: -8%;
+  @apply skew-x-3 -skew-y-6;
 }
 
 .doughnut-icon:nth-child(4) {
   --tw-translate-x: -8%;
+  @apply skew-y-6;
 }
 
 .doughnut-icon:nth-child(6) {
   --tw-translate-x: 8%;
+  @apply skew-y-3;
 }
 </style>
