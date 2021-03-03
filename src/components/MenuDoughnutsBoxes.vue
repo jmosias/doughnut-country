@@ -1,10 +1,14 @@
 <template>
-  <div class="w-1/2 p-6 bg-c-black flex flex-col items-center gap-y-6">
+  <div
+    class="w-full h-1/2 p-3 sm:w-1/2 gap-y-1 sm:h-full sm:p-6 sm:gap-y-3 bg-c-black flex flex-col items-center"
+  >
     <div class="w-4/5 flex justify-between items-center">
-      <h3 class="py-3 text-c-white text-3xl font-extralight">Boxes</h3>
+      <h3 class="py-1 text-xl sm:py-3 sm:text-2xl text-c-white font-extralight">
+        Boxes
+      </h3>
       <button
         @click="addNewBox"
-        class="bg-c-primary hover:opacity-80 text-c-black font-bold text-sm py-1 px-6 rounded uppercase"
+        class="text-xs py-1 px-3 sm:px-6 sm:text-sm bg-c-primary hover:opacity-80 text-c-black font-bold rounded uppercase"
       >
         + Add new box
       </button>
@@ -56,9 +60,11 @@
       </swiper>
 
       <div
-        class="z-10 absolute bottom-0 p-6 w-full flex justify-center items-center gap-x-16"
+        class="p-3 gap-x-8 sm:p-6 sm:gap-x-16 z-10 absolute bottom-0 w-full flex justify-center items-center"
       >
-        <p class="text-c-white font-extralight text-center">
+        <p
+          class="text-sm sm:text-base text-c-white font-extralight text-center"
+        >
           Box no. {{ current_box_index + 1 }}
         </p>
         <div class="flex gap-x-4 items-center">
@@ -80,10 +86,12 @@
 
       <div
         v-if="isTrashOpen"
-        class="z-10 absolute bottom-6 left-6 w-1/5 h-1/5 flex justify-center items-center border border-dashed border-c-pastel-red rounded-xl"
+        class="bottom-3 left-3 sm:bottom-6 sm:left-6 z-10 absolute w-1/5 h-1/5 flex justify-center items-center border border-dashed border-c-pastel-red rounded-xl"
       >
         <div class="absolute w-full h-full flex justify-center items-center">
-          <i class="fas fa-trash-alt text-c-pastel-red text-6xl"></i>
+          <i
+            class="text-3xl sm:text-6xl fas fa-trash-alt text-c-pastel-red"
+          ></i>
         </div>
 
         <draggable
@@ -91,7 +99,7 @@
           :group="{ name: 'doughnuts' }"
           @change="emptyTrash"
           item-key="trash"
-          class="w-4/5 h-4/5"
+          class="w-4/5 h-4/5 flex justify-center items-center"
           ghost-class="ghost-doughnut"
         >
           <template #item> </template>
@@ -209,7 +217,7 @@ export default {
 };
 </script>
 
-<style lang='postcss' scoped>
+<style lang="postcss" scoped>
 .swiper-boxes {
   height: 60vh;
   width: 100%;

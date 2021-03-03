@@ -1,19 +1,16 @@
 <template>
-  <div class="home">
+  <main>
     <menu-doughnuts></menu-doughnuts>
-    <menu-catalogue></menu-catalogue>
-  </div>
+  </main>
 </template>
 
 <script>
 import MenuDoughnuts from '../components/MenuDoughnuts.vue';
-import MenuCatalogue from '../components/MenuCatalogue.vue';
 
 export default {
   name: 'Home',
   components: {
     MenuDoughnuts,
-    MenuCatalogue,
   },
 };
 </script>

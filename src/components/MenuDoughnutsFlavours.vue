@@ -1,9 +1,15 @@
 <template>
-  <div class="w-1/2 p-6 bg-c-primary flex flex-col items-center gap-y-6">
-    <h3 class="py-3 text-c-tertiary text-3xl font-extralight text-center">
+  <div
+    class="w-full h-1/2 p-3 sm:w-1/2 gap-y-1 sm:h-full sm:p-6 sm:gap-y-3 bg-c-primary flex flex-col items-center"
+  >
+    <h3
+      class="py-1 text-xl sm:py-3 sm:text-2xl text-c-tertiary font-extralight"
+    >
       Flavours
     </h3>
-    <div class="flex-grow grid grid-cols-5 grid-rows-3 gap-2">
+    <div
+      class="scrollbar overflow-y-auto overflow-x-hidden flex-grow grid grid-cols-5 grid-rows-3 gap-2"
+    >
       <draggable
         v-for="(flavour, index) in flavours"
         :key="index"
@@ -11,7 +17,7 @@
         :group="{ name: 'doughnuts', pull: 'clone', put: false }"
         :sort="false"
         item-key="flavours"
-        class="box-border flex flex-col justify-center items-center"
+        class="box-border flex flex-col items-center"
         ghost-class="ghost-doughnut"
       >
         <template #item="{ element }">
@@ -22,12 +28,15 @@
           />
         </template>
         <template #footer>
-          <p class="text-c-tertiary font-extralight text-center">
+          <p
+            class="text-xs sm:text-sm text-c-tertiary font-extra-light text-center"
+          >
             {{ flavour.value[0].name }}
           </p>
           <button
+            v-if="isScreenBig"
             @click="addToBoxButton(flavour.value[0])"
-            class="btn-add bg-c-secondary text-c-tertiary font-bold py-1 px-3 rounded-lg text-xs uppercase"
+            class="btn-add w-3/5 bg-c-secondary text-c-tertiary font-bold px-2 rounded-lg text-xs uppercase"
           >
             Add
           </button>
@@ -46,6 +55,12 @@ export default {
   components: {
     draggable,
   },
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+      isScreenBig: window.innerWidth > 640,
+    };
+  },
   methods: {
     ...mapMutations('doughnuts', ['ADD_FLAVOUR']),
     addToBoxButton(flavour) {
@@ -55,9 +70,25 @@ export default {
         this.ADD_FLAVOUR({ length, flavour });
       }
     },
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
   },
   computed: {
     ...mapState('doughnuts', ['flavours', 'boxes', 'current_box_index']),
+  },
+  watch: {
+    windowWidth: function () {
+      this.isScreenBig = this.windowWidth > 640;
+    },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    });
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.onResize);
   },
 };
 </script>

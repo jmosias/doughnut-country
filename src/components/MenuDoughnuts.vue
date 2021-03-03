@@ -1,7 +1,9 @@
 <template>
-  <div class="flex h-screen">
-    <menu-doughnuts-boxes></menu-doughnuts-boxes>
-    <menu-doughnuts-flavours></menu-doughnuts-flavours>
+  <div class="w-full flex justify-center items-center">
+    <div class="menu-doughnuts flex flex-col-reverse sm:flex-row">
+      <menu-doughnuts-boxes></menu-doughnuts-boxes>
+      <menu-doughnuts-flavours></menu-doughnuts-flavours>
+    </div>
   </div>
 </template>
 
@@ -18,5 +20,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.menu-doughnuts {
+  width: 100%;
+  height: 90vh;
+}
+
+@media (min-width: 640px) {
+  .menu-doughnuts {
+    width: 180vh;
+  }
+}
 </style>
