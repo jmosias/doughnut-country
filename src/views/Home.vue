@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="flex flex-col justify-center items-center">
     <menu-doughnuts></menu-doughnuts>
   </main>
 </template>

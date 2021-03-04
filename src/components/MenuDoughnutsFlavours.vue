@@ -2,13 +2,11 @@
   <div
     class="w-full h-1/2 p-3 sm:w-1/2 gap-y-1 sm:h-full sm:p-6 sm:gap-y-3 bg-c-primary flex flex-col items-center"
   >
-    <h3
-      class="py-1 text-xl sm:py-3 sm:text-2xl text-c-tertiary font-extralight"
-    >
+    <h3 class="py-1 text-xl sm:py-3 sm:text-2xl text-c-tertiary font-head font-bold">
       Flavours
     </h3>
     <div
-      class="scrollbar overflow-y-auto overflow-x-hidden flex-grow grid grid-cols-5 grid-rows-3 gap-2"
+      class="scrollbar overflow-y-auto overflow-x-hidden flex-grow grid grid-cols-5 grid-rows-3 gap-1"
     >
       <draggable
         v-for="(flavour, index) in flavours"

@@ -16,15 +16,15 @@ export default {
 
 <style lang="postcss" scoped>
 .app-header {
-  height: 8vh;
-  background-color: #d8b98b;
-  background: linear-gradient(180deg, #49240f 50%, #d8b98b 50%);
+  height: 10vh;
+  background-color: #131217;
+  background: linear-gradient(180deg, #49240f 50%, #fff 50%);
 }
 
 .logo {
-  height: 4vh;
-  padding: 0.6vh 2.4vh;
-  border-radius: 1vh;
+  height: 6vh;
+  padding: 1.7vh 3vh 1.3vh;
+  border-radius: 50% / 50%;
   cursor: pointer;
   user-drag: none;
   user-select: none;
@@ -36,12 +36,12 @@ export default {
 
 .logo-text {
   font-weight: bold;
-  font-size: 1.8vh;
-  line-height: 1.8vh;
+  font-size: 1.5vh;
+  line-height: 1.5vh;
 }
 
 .logo-image {
-  height: 3vh;
+  height: 2.6vh;
   width: auto;
   user-drag: none;
   user-select: none;
@@ -53,23 +53,21 @@ export default {
 
 @media (min-width: 640px) {
   .app-header {
-    height: 16vh;
-    margin-bottom: 6vh;
+    height: 20vh;
   }
 
   .logo {
-    height: 8vh;
-    padding: 1.2vh 4.2vh;
-    border-radius: 2vh;
+    height: 12vh;
+    padding: 3.4vh 6vh 2.6vh;
   }
 
   .logo-text {
-    font-size: 3.6vh;
-    line-height: 3.6vh;
+    font-size: 3vh;
+    line-height: 3vh;
   }
 
   .logo-image {
-    height: 6vh;
+    height: 5.2vh;
   }
 }
 </style>

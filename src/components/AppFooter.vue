@@ -1,16 +1,16 @@
 <template>
   <div
-    class="app-footer bg-c-tertiary text-c-white flex flex-col justify-center items-center gap-1"
+    class="app-footer text-xs sm:text-sm bg-c-black text-c-white flex flex-col justify-center items-center gap-1"
   >
-    <div class="text-c-primary flex flex-row gap-2">
+    <div class="gap-2 sm:gap-4 text-c-primary flex flex-row">
       <router-link to="/">
-        <p class="text-sm sm:text-base">Home</p>
+        <p>Home</p>
       </router-link>
       <router-link to="/about">
-        <p class="text-sm sm:text-base">About</p>
+        <p>About</p>
       </router-link>
     </div>
-    <p class="text-xs sm:text-sm">Doughnut Country Food House &copy; 2021</p>
+    <p>Doughnut Country Food House &copy; 2021</p>
   </div>
 </template>
 
@@ -23,13 +23,11 @@ export default {
 <style scoped>
 .app-footer {
   height: 12vh;
-  margin-top: 3vh;
 }
 
 @media (min-width: 640px) {
   .app-footer {
     height: 24vh;
-    margin-top: 6vh;
   }
 }
 </style>

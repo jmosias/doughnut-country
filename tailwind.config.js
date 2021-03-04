@@ -3,7 +3,8 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      body: ['"Martel Sans"', 'sans-serif']
+      body: ['"Martel Sans"', 'sans-serif'],
+      head: ['Merienda', 'cursive']
     },
     extend: {
       colors: {

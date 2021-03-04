@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-c-secondary">
+  <div class="bg-c-white">
     <app-header></app-header>
     <router-view />
     <app-footer></app-footer>

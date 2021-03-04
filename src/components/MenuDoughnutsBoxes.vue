@@ -1,21 +1,23 @@
 <template>
   <div
-    class="w-full h-1/2 p-3 sm:w-1/2 gap-y-1 sm:h-full sm:p-6 sm:gap-y-3 bg-c-black flex flex-col items-center"
+    class="w-full h-1/2 p-3 sm:w-1/2 gap-y-1 sm:h-full sm:p-6 sm:gap-y-3 bg-c-secondary flex flex-col items-center"
   >
     <div class="w-4/5 flex justify-between items-center">
-      <h3 class="py-1 text-xl sm:py-3 sm:text-2xl text-c-white font-extralight">
+      <h3
+        class="py-1 text-xl sm:py-3 sm:text-2xl text-c-tertiary font-head font-bold"
+      >
         Boxes
       </h3>
       <button
         @click="addNewBox"
-        class="text-xs py-1 px-3 sm:px-6 sm:text-sm bg-c-primary hover:opacity-80 text-c-black font-bold rounded uppercase"
+        class="text-xs py-1 px-3 sm:px-6 sm:text-sm bg-c-primary hover:opacity-80 text-c-tertiary font-bold rounded uppercase"
       >
         + Add new box
       </button>
     </div>
 
     <div
-      class="overflow-hidden relative w-full flex-grow border border-dashed border-c-white rounded-xl"
+      class="overflow-hidden relative w-full flex-grow border border-dashed border-c-tertiary rounded-xl"
     >
       <swiper
         @swiper="setSwiperBoxes"
@@ -62,36 +64,32 @@
       <div
         class="p-3 gap-x-8 sm:p-6 sm:gap-x-16 z-10 absolute bottom-0 w-full flex justify-center items-center"
       >
-        <p
-          class="text-sm sm:text-base text-c-white font-extralight text-center"
-        >
+        <p class="text-sm sm:text-base text-c-tertiary font-extralight">
           Box no. {{ current_box_index + 1 }}
         </p>
         <div class="flex gap-x-4 items-center">
           <i
             @click="cloneBox"
-            class="cursor-pointer fas fa-clone hover:opacity-80 text-c-pastel-yellow text-lg"
+            class="text-base sm:text-lg cursor-pointer fas fa-clone hover:opacity-80 text-c-tertiary"
           ></i>
           <i
             @click="clearBox"
-            class="cursor-pointer fas fa-undo-alt hover:opacity-80 text-c-pastel-orange text-lg"
+            class="text-base sm:text-lg cursor-pointer fas fa-undo-alt hover:opacity-80 text-c-tertiary"
           ></i>
           <i
             @click="removeBox"
             :disabled="isLastBox"
-            class="cursor-pointer fas fa-times hover:opacity-80 text-c-pastel-red text-2xl disabled:opacity-40"
+            class="text-xl sm:text-2xl cursor-pointer fas fa-times hover:opacity-80 text-c-tertiary disabled:opacity-40"
           ></i>
         </div>
       </div>
 
       <div
         v-if="isTrashOpen"
-        class="bottom-3 left-3 sm:bottom-6 sm:left-6 z-10 absolute w-1/5 h-1/5 flex justify-center items-center border border-dashed border-c-pastel-red rounded-xl"
+        class="bottom-3 left-3 sm:bottom-6 sm:left-6 z-10 absolute w-1/5 h-1/5 flex justify-center items-center border border-dashed border-c-tertiary rounded-xl"
       >
         <div class="absolute w-full h-full flex justify-center items-center">
-          <i
-            class="text-3xl sm:text-6xl fas fa-trash-alt text-c-pastel-red"
-          ></i>
+          <i class="text-3xl sm:text-6xl fas fa-trash-alt text-c-tertiary"></i>
         </div>
 
         <draggable
@@ -233,11 +231,11 @@ export default {
 
 .slide-not-active {
   opacity: 50%;
-  @apply cursor-pointer opacity-50 transform-gpu scale-50 transition-all;
+  @apply cursor-pointer opacity-75 transform-gpu scale-50 transition-all;
 }
 
 .slide-not-active:hover {
-  @apply opacity-75 scale-75;
+  @apply opacity-100 scale-75;
 }
 
 .doughnut-box {
