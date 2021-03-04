@@ -1,18 +1,18 @@
 <template>
-  <div class="bg-c-white">
-    <app-header></app-header>
+  <div class="bg-c-black">
+    <!-- <app-header></app-header> -->
     <router-view />
     <app-footer></app-footer>
   </div>
 </template>
 
 <script>
-import AppHeader from './components/AppHeader.vue';
+// import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
 
 export default {
   components: {
-    AppHeader,
+    // AppHeader,
     AppFooter,
   },
   created() {

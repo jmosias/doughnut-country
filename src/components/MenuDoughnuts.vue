@@ -1,5 +1,8 @@
 <template>
-  <div class="container flex justify-center items-center">
+  <div
+    id="menu"
+    class="container flex justify-center items-center bg-transparent"
+  >
     <div
       class="menu-doughnuts flex flex-col-reverse sm:flex-row border border-c-tertiary"
     >
@@ -30,7 +33,7 @@ export default {
 .menu-doughnuts {
   width: 100%;
   height: 90vh;
-  margin-bottom: 3vh;
+  margin: 2vh 0;
 }
 
 @media (min-width: 640px) {
@@ -40,7 +43,7 @@ export default {
 
   .menu-doughnuts {
     width: 180vh;
-    margin-bottom: 6vh;
+    margin: 5vh 0;
   }
 }
 </style>
