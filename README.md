@@ -2,8 +2,7 @@
 
 **Doughnut country is a work-in-progress**
 
-You can visit the deployed web app here:
-https://doughnut-country.netlify.app/
+https://doughnutcountry.web.app/
 
 ### Summary
 Fill your doughnut and coffee cravings with Doughnut Country! 
