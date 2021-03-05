@@ -1,16 +1,17 @@
 import { v4 as uuidv4 } from 'uuid';
-import image12 from '@/assets/images/doughnut_flavours/cappuccino.png';
 
 const namespaced = true;
 const state = {
   categories: [
     {
       id: uuidv4(),
-      name: 'Bundles'
+      name: 'Bundles',
+      icon: 'donuts'
     },
     {
       id: uuidv4(),
-      name: 'Beverages'
+      name: 'Beverages',
+      icon: 'coffee'
     }
   ],
   items: [
@@ -20,7 +21,7 @@ const state = {
       name: 'Cinnamon Rolls',
       description: '10 pcs',
       price: 209,
-      img: image12,
+      img: require('@/assets/images/catalogue/bundles/cinnamon.png'),
       isAvailable: true
     },
     {
@@ -29,7 +30,16 @@ const state = {
       name: 'Coffee',
       description: '',
       price: 79,
-      img: image12,
+      img: require('@/assets/images/catalogue/beverages/paper_cup.png'),
+      isAvailable: true
+    },
+    {
+      id: uuidv4(),
+      categoryName: 'Beverages',
+      name: 'Iced Coffee',
+      description: '',
+      price: 79,
+      img: require('@/assets/images/catalogue/beverages/paper_cup.png'),
       isAvailable: true
     },
     {
@@ -38,7 +48,16 @@ const state = {
       name: 'Hot Chocolate',
       description: '',
       price: 79,
-      img: image12,
+      img: require('@/assets/images/catalogue/beverages/paper_cup.png'),
+      isAvailable: true
+    },
+    {
+      id: uuidv4(),
+      categoryName: 'Beverages',
+      name: 'Iced Milk',
+      description: '',
+      price: 79,
+      img: require('@/assets/images/catalogue/beverages/paper_cup.png'),
       isAvailable: true
     }
   ]

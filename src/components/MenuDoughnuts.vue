@@ -1,6 +1,6 @@
 <template>
   <div
-    id="menu"
+    id="flavours"
     class="container flex justify-center items-center bg-transparent"
   >
     <div
