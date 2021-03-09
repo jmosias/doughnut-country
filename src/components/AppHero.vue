@@ -1,35 +1,38 @@
 <template>
-  <div class="hero-image w-full h-screen">
+  <div id="top" class="hero-image w-full h-screen">
     <div
       class="hero-content h-full flex flex-col justify-between items-center text-c-white"
     >
-      <div class="flex flex-col gap-4">
+      <div class="gap-10 sm:gap-12 flex flex-col items-center">
         <div
-          class="text-base gap-5 sm:text-lg sm:gap-10 flex justify-center font-head"
+          class="text-xs gap-5 sm:text-base sm:gap-10 flex justify-center uppercase"
         >
           <a href="#flavours" class="hero-link" v-smooth-scroll>flavours</a>
           <a href="#catalogue" class="hero-link" v-smooth-scroll>catalogue</a>
-          <a href="#about-us" class="hero-link" v-smooth-scroll>about us</a>
+          <a href="#our-story" class="hero-link" v-smooth-scroll>our story</a>
         </div>
-        <div to="/" class="logo disable-select flex justify-center">
+        <div
+          class="logo disable-select inline-flex justify-center text-c-black"
+          v-smooth-scroll
+        >
           <p class="logo-text float-left">D<br />C</p>
           <img
-            src="../assets/images/app_logo_white.png"
+            src="../assets/images/app_logo.png"
             class="logo-image disable-select float-left"
           />
           <p class="logo-text">UGHNUT<br />UNTRY</p>
         </div>
       </div>
-      <div class="text-center">
+      <a
+        href="#flavours"
+        class="cursor-pointer text-center hover:text-c-secondary transition-all"
+        v-smooth-scroll
+      >
         <h3 class="disable-select text-xl sm:text-2xl font-head font-bold">
           choose your flavours!
         </h3>
-        <a href="#flavours" class="cursor-pointer" v-smooth-scroll
-          ><i
-            class="text-3xl fas fa-chevron-down animate-bounce text-c-secondary"
-          ></i
-        ></a>
-      </div>
+        <i class="text-3xl sm:text-4xl fas fa-chevron-down animate-bounce"></i>
+      </a>
     </div>
   </div>
 </template>
@@ -50,7 +53,7 @@ export default {
 }
 
 .hero-content {
-  padding: 24vh 0 12vh;
+  padding: 6vh 0 12vh;
 }
 
 .hero-link {
@@ -67,9 +70,9 @@ export default {
   display: block;
   position: absolute;
   bottom: 0;
-  width: 21%;
-  border-bottom: 0.15vh solid #fff;
-  @apply border-c-secondary;
+  width: 20%;
+  border-bottom: 0.143vh solid #fff;
+  @apply border-c-secondary transition-all;
 }
 
 .hero-link:hover::before {
@@ -77,19 +80,19 @@ export default {
 }
 
 .logo {
-  border-top: 0.42vh solid #fff;
-  border-bottom: 0.42vh solid #fff;
-  padding: 1vh 1vh 0 1vh;
+  @apply bg-c-primary bg-opacity-70;
+  border-radius: 50% 50%;
+  padding: 3.5vh 6vh 2.5vh;
 }
 
 .logo-text {
   font-weight: bold;
-  font-size: 5vh;
-  line-height: 5vh;
+  font-size: 3vh;
+  line-height: 3vh;
 }
 
 .logo-image {
-  height: 9vh;
+  height: 5.5vh;
   width: auto;
 }
 
@@ -99,16 +102,20 @@ export default {
   }
 
   .hero-content {
-    padding-bottom: 6vh;
+    padding: 12vh 0 6vh;
+  }
+
+  .logo {
+    padding: 7vh 12vh 5vh;
   }
 
   .logo-text {
-    font-size: 10vh;
-    line-height: 10vh;
+    font-size: 6vh;
+    line-height: 6vh;
   }
 
   .logo-image {
-    height: 18vh;
+    height: 11vh;
   }
 }
 </style>

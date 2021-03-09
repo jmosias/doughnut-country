@@ -2,17 +2,18 @@
   <menu-catalogue-icons></menu-catalogue-icons>
   <div
     id="catalogue"
-    class="catalogue w-full bg-c-white flex flex-col items-center gap-20"
+    class="catalogue relative w-full bg-c-white flex flex-col items-center gap-16"
   >
-    <div
-      class="gap-12 sm:gap-24 pb-4 w-4/5 flex justify-center items-center border-b border-dashed border-c-secondary"
-    >
+    <div class="gap-12 sm:gap-24 w-4/5 flex justify-center items-center">
       <div
         v-for="category in categories"
         :key="category.id"
         @click="changeCurrentCategoryName(category.name)"
-        class="category flex flex-col justify-center items-center cursor-pointer text-c-tertiary hover:text-c-secondary transition-all"
-        :class="{ selected: currentCategoryName == category.name }"
+        class="category flex flex-col justify-center items-center cursor-pointer text-c-secondary hover:text-c-tertiary transition-all"
+        :class="{
+          selected: currentCategoryName == category.name,
+          'not-selected': currentCategoryName !== category.name,
+        }"
       >
         <svg class="icon fill-current">
           <use :xlink:href="`#${category.icon}`" />
@@ -103,9 +104,9 @@ export default {
   display: block;
   position: absolute;
   bottom: 0;
-  width: 21%;
-  border-bottom: 0.15vh solid #fff;
-  @apply border-c-secondary;
+  width: 20%;
+  border-bottom: 0.143vh solid #fff;
+  @apply border-current transition-all;
 }
 
 .category:hover > .category-name::before,
@@ -114,7 +115,11 @@ export default {
 }
 
 .category.selected {
-  @apply text-c-secondary;
+  @apply text-c-tertiary;
+}
+
+.category.not-selected {
+  @apply transform-gpu scale-75;
 }
 
 @media (min-width: 640px) {
