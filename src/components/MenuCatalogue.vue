@@ -1,5 +1,5 @@
 <template>
-  <menu-catalogue-icons></menu-catalogue-icons>
+  <app-icons></app-icons>
   <div
     id="catalogue"
     class="catalogue relative w-full bg-c-white flex flex-col items-center gap-16"
@@ -58,12 +58,12 @@
 
 <script>
 import { mapState } from 'vuex';
-import MenuCatalogueIcons from './MenuCatalogueIcons';
+import AppIcons from './AppIcons';
 
 export default {
   name: 'MenuCatalogue',
   components: {
-    MenuCatalogueIcons,
+    AppIcons,
   },
   data() {
     return {
