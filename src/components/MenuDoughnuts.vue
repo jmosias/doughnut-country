@@ -3,9 +3,7 @@
     id="flavours"
     class="container w-full flex justify-center items-center bg-c-transparent"
   >
-    <div
-      class="menu-doughnuts flex flex-col-reverse sm:flex-row border border-c-tertiary"
-    >
+    <div class="menu-doughnuts flex flex-col-reverse sm:flex-row">
       <menu-doughnuts-boxes></menu-doughnuts-boxes>
       <menu-doughnuts-flavours></menu-doughnuts-flavours>
     </div>

@@ -39,7 +39,7 @@
           {{ item.name }}
           <span
             v-if="item.description"
-            class="text-sm sm:text-xs font-body text-c-secondary"
+            class="text-sm font-body text-c-secondary"
             >({{ item.description }})</span
           >
         </h4>
@@ -47,6 +47,7 @@
           &#8369;{{ item.price }}
         </p>
         <button
+          @click="addToCart(item)"
           class="text-xs sm:text-sm border border-c-secondary hover:border-c-tertiary text-c-tertiary font-extralight py-1 px-3 rounded uppercase transitions-all"
         >
           Add to order
@@ -57,7 +58,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 import AppIcons from './AppIcons';
 
 export default {
@@ -71,6 +72,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations('cart', ['ADD_ITEM']),
     currentCategoryItems() {
       return this.items.filter(
         (item) => item.categoryName == this.currentCategoryName
@@ -78,6 +80,9 @@ export default {
     },
     changeCurrentCategoryName(name) {
       this.currentCategoryName = name;
+    },
+    addToCart(item) {
+      this.ADD_ITEM(item);
     },
   },
   computed: {

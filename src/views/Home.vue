@@ -3,6 +3,7 @@
     <app-hero></app-hero>
     <menu-doughnuts></menu-doughnuts>
     <menu-catalogue></menu-catalogue>
+    <shopping-cart></shopping-cart>
   </main>
 </template>
 
@@ -10,6 +11,7 @@
 import AppHero from '../components/AppHero.vue';
 import MenuDoughnuts from '../components/MenuDoughnuts.vue';
 import MenuCatalogue from '../components/MenuCatalogue.vue';
+import ShoppingCart from '../components/ShoppingCart.vue';
 
 export default {
   name: 'Home',
@@ -17,6 +19,7 @@ export default {
     AppHero,
     MenuDoughnuts,
     MenuCatalogue,
+    ShoppingCart,
   },
 };
 </script>
