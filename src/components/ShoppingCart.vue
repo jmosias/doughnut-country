@@ -25,17 +25,44 @@
           >
             <p>It's empty.</p>
             <br />
-            <p>Press the button under the catalogue items to add them here.</p>
-            <br />
             <p>
-              Doughnut boxes with 6 doughnuts are automatically added here.
-              (soon)
+              Doughnut boxes that are filled completely are automatically added
+              here.
             </p>
+            <br />
+            <p>Press the button under the catalogue items to add them here.</p>
           </div>
           <div
             v-else
             class="flex-grow p-6 scrollbar overflow-y-auto overflow-x-hidden flex flex-col sm:border-l border-c-black"
           >
+            <div
+              v-for="(box, index) in completeBoxes"
+              :key="index"
+              class="flex mb-16 pb-6 border-b border-c-tertiary border-opacity-10"
+            >
+              <div class="w-24">
+                <h4 class="font-head font-bold">Box {{ index + 1 }}</h4>
+                <p class="italic font-extralight">
+                  &#8369;
+                  {{ new Intl.NumberFormat().format(199) }}
+                </p>
+              </div>
+              <div>
+                <p
+                  v-for="(flavour, index) in countedFlavours(box.value)"
+                  :key="index"
+                  class="text-xs"
+                >
+                  <img
+                    :src="flavour.img"
+                    :alt="flavour.name"
+                    class="h-3 w-auto inline-block"
+                  />
+                  x{{ flavour.quantity }} {{ flavour.name }}
+                </p>
+              </div>
+            </div>
             <div
               v-for="(order, index) in orders"
               :key="order.id"
@@ -97,7 +124,8 @@
               </h4>
             </div>
             <button
-              class="px-6 py-2 font-bold text-base uppercase bg-c-primary text-c-tertiary hover:bg-c-white rounded transition-all"
+              class="px-6 py-2 font-bold text-base uppercase bg-c-primary text-c-tertiary transition-all"
+              :disabled="!grandTotal"
             >
               Place Order
             </button>
@@ -131,15 +159,55 @@ export default {
     onScroll() {
       this.windowScrollY = window.scrollY;
     },
+    countedFlavours(flavours) {
+      let box = [];
+
+      flavours.forEach((flavour) => {
+        const countedFlavour = {
+          name: flavour.name,
+          id: flavour.id,
+          img: flavour.img,
+          quantity: 1,
+        };
+
+        if (box.length) {
+          let isNew = true;
+          box.forEach((item) => {
+            if (item.name === flavour.name) {
+              isNew = false;
+              item.quantity++;
+            }
+          });
+          if (isNew) {
+            box.push(countedFlavour);
+          }
+        } else {
+          box.push(countedFlavour);
+        }
+      });
+
+      return box;
+    },
   },
   computed: {
     ...mapState('cart', ['orders']),
+    ...mapState('doughnuts', ['boxes']),
     grandTotal() {
       let total = 0;
+
+      total += 199 * this.completeBoxes.length;
+
       this.orders.forEach((order) => {
         total += order.price;
       });
+
       return total;
+    },
+    completeBoxes() {
+      const filledBoxes = this.boxes.filter(
+        (box) => box.value.length === box.capacity
+      );
+      return filledBoxes;
     },
   },
   mounted() {
@@ -175,5 +243,10 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 40%;
 }
 </style>
