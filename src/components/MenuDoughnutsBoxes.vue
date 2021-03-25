@@ -4,13 +4,13 @@
   >
     <div class="w-4/5 flex justify-between items-center">
       <h3
-        class="py-1 text-xl sm:py-3 sm:text-2xl text-c-tertiary font-head font-bold"
+        class="py-1 text-lg sm:py-3 sm:text-xl text-c-tertiary font-head font-bold"
       >
         Boxes
       </h3>
       <button
         @click="addNewBox"
-        class="text-xs py-1 px-3 sm:px-6 sm:text-sm bg-c-primary hover:opacity-80 text-c-tertiary font-bold rounded uppercase"
+        class="text-xs py-1 px-3 sm:px-6 sm:text-sm bg-c-primary hover:opacity-90 text-c-tertiary font-bold rounded uppercase"
       >
         + Add new box
       </button>
@@ -70,16 +70,16 @@
         <div class="flex gap-x-4 items-center">
           <i
             @click="cloneBox"
-            class="text-base sm:text-lg cursor-pointer fas fa-clone hover:opacity-80 text-c-tertiary"
+            class="text-base sm:text-lg cursor-pointer fas fa-clone hover:opacity-90 text-c-tertiary"
           ></i>
           <i
             @click="clearBox"
-            class="text-base sm:text-lg cursor-pointer fas fa-undo-alt hover:opacity-80 text-c-tertiary"
+            class="text-base sm:text-lg cursor-pointer fas fa-undo-alt hover:opacity-90 text-c-tertiary"
           ></i>
           <i
             @click="removeBox"
             :disabled="isLastBox"
-            class="text-xl sm:text-2xl cursor-pointer fas fa-times hover:opacity-80 text-c-tertiary disabled:opacity-40"
+            class="text-xl sm:text-2xl cursor-pointer fas fa-times hover:opacity-90 text-c-tertiary disabled:opacity-40"
           ></i>
         </div>
       </div>

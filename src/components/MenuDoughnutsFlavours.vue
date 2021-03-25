@@ -1,12 +1,14 @@
 <template>
   <div
-    class="w-full h-1/2 p-3 sm:w-1/2 gap-y-1 sm:h-full sm:p-6 sm:gap-y-3 bg-c-primary flex flex-col items-center"
+    class="w-full h-1/2 p-3 sm:w-1/2 sm:h-full gap-y-1 sm:p-6 sm:gap-y-3 bg-c-primary flex flex-col items-center"
   >
-    <h3 class="py-1 text-xl sm:py-3 sm:text-2xl text-c-tertiary font-head font-bold">
+    <h3
+      class="py-1 text-lg sm:py-3 sm:text-xl text-c-tertiary font-head font-bold"
+    >
       Flavours
     </h3>
     <div
-      class="scrollbar overflow-y-auto overflow-x-hidden flex-grow grid grid-cols-5 grid-rows-3 gap-1"
+      class="scrollbar overflow-y-auto overflow-x-hidden flex-grow flex flex-wrap sm:justify-center gap-1"
     >
       <draggable
         v-for="(flavour, index) in flavours"
@@ -15,7 +17,7 @@
         :group="{ name: 'doughnuts', pull: 'clone', put: false }"
         :sort="false"
         item-key="flavours"
-        class="box-border flex flex-col items-center"
+        class="w-1/5 sm:w-1/6 h-auto box-border flex flex-col items-center sm:justify-around"
         ghost-class="ghost-doughnut"
       >
         <template #item="{ element }">
@@ -34,7 +36,7 @@
           <button
             v-if="isScreenBig"
             @click="addToBoxButton(flavour.value[0])"
-            class="btn-add w-3/5 bg-c-secondary text-c-tertiary font-bold px-2 rounded-lg text-xs uppercase"
+            class="w-3/5 bg-c-secondary text-c-tertiary font-bold px-2 rounded-lg text-xs uppercase hover:opacity-90"
           >
             Add
           </button>
@@ -110,13 +112,5 @@ export default {
 
 .ghost-doughnut {
   @apply opacity-60 border border-dashed border-c-tertiary;
-}
-
-.btn-add {
-  @apply transition-all;
-}
-
-.btn-add:hover {
-  @apply transform-gpu scale-110;
 }
 </style>
