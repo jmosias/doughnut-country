@@ -244,9 +244,4 @@ export default {
 .fade-leave-to {
   opacity: 0;
 }
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 40%;
-}
 </style>

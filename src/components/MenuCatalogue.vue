@@ -73,6 +73,10 @@ export default {
   },
   methods: {
     ...mapMutations('cart', ['ADD_ITEM']),
+    ...mapMutations('notifications', ['ADD_NOTIFICATION']),
+    addNotification(message, timer = 3000) {
+      this.ADD_NOTIFICATION({ message, timer });
+    },
     currentCategoryItems() {
       return this.items.filter(
         (item) => item.categoryName == this.currentCategoryName
@@ -83,6 +87,7 @@ export default {
     },
     addToCart(item) {
       this.ADD_ITEM(item);
+      this.addNotification(`${item.name} has been added to your order.`);
     },
   },
   computed: {
