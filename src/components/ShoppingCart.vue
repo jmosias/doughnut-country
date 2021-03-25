@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div
-      v-show="windowScrollY > 300"
+      v-show="show"
       class="z-50 fixed bottom-0 right-0 w-full bg-c-black text-c-white flex flex-col text-sm sm:text-base border-t border-c-white rounded-t-3xl sm:w-1/3 transition-all"
     >
       <div
@@ -145,6 +145,8 @@ export default {
     return {
       active: false,
       windowScrollY: 0,
+      show: false,
+      bottomOfWindow: false,
     };
   },
   methods: {
@@ -162,6 +164,22 @@ export default {
     },
     onScroll() {
       this.windowScrollY = window.scrollY;
+
+      this.bottomOfWindow =
+        Math.max(
+          window.pageYOffset,
+          document.documentElement.scrollTop,
+          document.body.scrollTop
+        ) +
+          window.innerHeight +
+          300 >=
+        document.documentElement.offsetHeight;
+
+      if (!this.bottomOfWindow && this.windowScrollY > 300) {
+        this.show = true;
+      } else {
+        this.show = false;
+      }
     },
     countedFlavours(flavours) {
       let box = [];
