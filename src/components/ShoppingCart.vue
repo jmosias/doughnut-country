@@ -45,7 +45,7 @@
                 <h4 class="font-head font-bold">Box {{ index + 1 }}</h4>
                 <p class="italic font-extralight">
                   &#8369;
-                  {{ new Intl.NumberFormat().format(199) }}
+                  {{ new Intl.NumberFormat().format(box_of_6_price) }}
                 </p>
               </div>
               <div>
@@ -191,11 +191,11 @@ export default {
   },
   computed: {
     ...mapState('cart', ['orders']),
-    ...mapState('doughnuts', ['boxes']),
+    ...mapState('doughnuts', ['boxes', 'box_of_6_price']),
     grandTotal() {
       let total = 0;
 
-      total += 199 * this.completeBoxes.length;
+      total += this.box_of_6_price * this.completeBoxes.length;
 
       this.orders.forEach((order) => {
         total += order.price;

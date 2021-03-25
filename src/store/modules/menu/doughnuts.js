@@ -20,6 +20,7 @@ const state = {
     { value: [{ name: 'Nutella', id: uuidv4(), img: require('@/assets/images/doughnut_flavours/nutella.png') }] },
   ],
   boxes: [],
+  box_of_6_price: 199,
   current_box_index: 0,
 }
 
