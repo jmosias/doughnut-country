@@ -155,7 +155,6 @@ export default {
     ]),
     ...mapMutations('notifications', ['ADD_NOTIFICATION']),
     addNotification(message, timer = 3000) {
-      console.log(message);
       this.ADD_NOTIFICATION({ message, timer });
     },
     toggleActive() {
