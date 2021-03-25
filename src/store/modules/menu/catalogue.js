@@ -30,7 +30,7 @@ const state = {
       name: 'Coffee',
       description: '',
       price: 79,
-      img: require('@/assets/images/catalogue/beverages/paper_cup.png'),
+      img: require('@/assets/images/catalogue/beverages/white_paper_cup_white_lid.jpg'),
       isAvailable: true
     },
     {
@@ -39,7 +39,7 @@ const state = {
       name: 'Iced Coffee',
       description: '',
       price: 79,
-      img: require('@/assets/images/catalogue/beverages/paper_cup.png'),
+      img: require('@/assets/images/catalogue/beverages/white_paper_cup_black_lid.jpg'),
       isAvailable: true
     },
     {
@@ -48,7 +48,7 @@ const state = {
       name: 'Hot Chocolate',
       description: '',
       price: 79,
-      img: require('@/assets/images/catalogue/beverages/paper_cup.png'),
+      img: require('@/assets/images/catalogue/beverages/black_paper_cup_white_lid.jpg'),
       isAvailable: true
     },
     {
@@ -57,7 +57,7 @@ const state = {
       name: 'Iced Milk',
       description: '',
       price: 79,
-      img: require('@/assets/images/catalogue/beverages/paper_cup.png'),
+      img: require('@/assets/images/catalogue/beverages/white_paper_cup_black_lid.jpg'),
       isAvailable: true
     }
   ]
