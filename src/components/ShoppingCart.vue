@@ -16,7 +16,7 @@
       </div>
       <transition name="slide">
         <div
-          v-if="active"
+          v-show="active"
           class="shopping-cart flex flex-col justify-between bg-c-white text-c-tertiary"
         >
           <div
@@ -153,6 +153,11 @@ export default {
       'REDUCE_QUANTITY',
       'REMOVE_ITEM',
     ]),
+    ...mapMutations('notifications', ['ADD_NOTIFICATION']),
+    addNotification(message, timer = 3000) {
+      console.log(message);
+      this.ADD_NOTIFICATION({ message, timer });
+    },
     toggleActive() {
       this.active = !this.active;
     },
@@ -204,9 +209,22 @@ export default {
       return total;
     },
     completeBoxes() {
-      const filledBoxes = this.boxes.filter(
-        (box) => box.value.length === box.capacity
-      );
+      let filledBoxes = [];
+
+      this.boxes.forEach((box, index) => {
+        if (box.value.length === box.capacity) {
+          filledBoxes.push(box);
+          if (!box.notified) {
+            this.addNotification(
+              `Box ${index + 1} has been added to your order.`
+            );
+          }
+          box.notified = true;
+        } else {
+          box.notified = false;
+        }
+      });
+
       return filledBoxes;
     },
   },
