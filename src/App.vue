@@ -1,21 +1,10 @@
 <template>
   <div class="bg-c-black">
     <router-view />
-    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
-import AppFooter from './components/AppFooter.vue';
-
-export default {
-  components: {
-    AppFooter,
-  },
-  created() {
-    this.$store.commit('doughnuts/ADD_NEW_BOX');
-  },
-};
 </script>
 
 <style lang="postcss">
@@ -45,17 +34,7 @@ export default {
   -ms-user-select: none;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-button:disabled {
+.btn:disabled {
   cursor: not-allowed;
   opacity: 40%;
 }
