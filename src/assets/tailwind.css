@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    @apply font-body text-c-black;
+    @apply font-body bg-c-white text-c-tertiary;
   }
 
   button, select {
