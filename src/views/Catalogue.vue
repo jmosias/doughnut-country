@@ -16,21 +16,29 @@
             'not-selected': currentCategoryName !== category.name,
           }"
         >
-          <svg class="w-12 h-12 fill-current">
+          <svg class="w-10 h-10 sm:w-12 sm:h-12 fill-current">
             <use :xlink:href="`#${category.icon}`" />
           </svg>
-          <p class="text-sm font-head font-bold">{{ category.name }}</p>
+          <p class="text-xs sm:text-sm font-head font-bold">
+            {{ category.name }}
+          </p>
         </div>
       </div>
     </div>
     <nav
-      class="bg-gradient-primary w-full py-4 px-8 flex justify-between items-center sm:w-auto sm:h-full sm:py-8 sm:px-4 sm:flex-col sm:justify-start sm:gap-8"
+      class="bg-gradient-primary w-full py-2 px-8 flex justify-between items-center sm:w-auto sm:h-full sm:py-8 sm:px-4 sm:flex-col sm:justify-start sm:gap-4"
     >
-      <i class="fas fa-bars sm:cursor-pointer"></i>
-      <p class="font-head font-bold sm:hidden">Catalogue</p>
-      <svg class="w-8 h-8 fill-current sm:cursor-pointer">
-        <use :xlink:href="'#box'" />
-      </svg>
+      <i class="fas fa-bars p-2 sm:cursor-pointer"></i>
+      <!-- <p class="text-sm font-head font-bold sm:hidden">Catalogue</p> -->
+      <div class="relative p-2 sm:cursor-pointer">
+        <svg class="w-8 h-8 fill-current">
+          <use :xlink:href="'#box'" />
+        </svg>
+        <span
+          class="absolute top-0 left-0 w-4 h-4 flex justify-center items-center font-head text-xs bg-red-500 text-c-white rounded-full"
+          >0</span
+        >
+      </div>
     </nav>
   </main>
 </template>
@@ -64,12 +72,6 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.category,
-.category p,
-.category svg {
-  @apply transition-all;
-}
-
 .category {
   @apply border-c-tertiary;
 }
