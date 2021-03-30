@@ -5,12 +5,14 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { transition: 'fade' }
   },
   {
     path: '/catalogue',
     name: 'Catalogue',
-    component: () => import(/* webpackChunkName: "catalogue" */ '../views/Catalogue.vue')
+    component: () => import(/* webpackChunkName: "catalogue" */ '../views/Catalogue.vue'),
+    meta: { transition: 'fade' }
   },
   {
     path: '/our_story',

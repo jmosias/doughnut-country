@@ -1,7 +1,9 @@
 <template>
-  <div class="h-screen">
-    <router-view />
-  </div>
+  <router-view v-slot="{ Component, route }">
+    <transition :name="route.meta.transition" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 
 <script>
@@ -37,5 +39,18 @@
 .btn:disabled {
   cursor: not-allowed;
   opacity: 40%;
+}
+
+.wrapper {
+  @apply h-full w-full overflow-hidden flex flex-col justify-center items-center;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 1s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
