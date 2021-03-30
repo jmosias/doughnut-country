@@ -1,5 +1,5 @@
 <template>
-  <main class="wrapper gradient-bg bg-c-primary">
+  <main class="wrapper bg-gradient-primary">
     <div class="disable-select inline-flex justify-center text-c-black">
       <p class="logo-text float-left">D<br />C</p>
       <img
@@ -30,17 +30,6 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.gradient-bg {
-  background-image: linear-gradient(
-    to right top,
-    #ffd270,
-    #ffd885,
-    #ffdd91,
-    #ffe5ad,
-    #ffecc2
-  );
-}
-
 .logo-text {
   font-weight: bold;
   font-size: 1rem;

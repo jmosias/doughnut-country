@@ -45,6 +45,23 @@
   @apply h-full w-full overflow-hidden flex flex-col justify-center items-center;
 }
 
+.bg-gradient-primary {
+  background: #ffdd91;
+  background: linear-gradient(
+    to left top,
+    #ffd270,
+    #ffd885,
+    #ffdd91,
+    #ffe5ad,
+    #ffecc2
+  );
+}
+
+.bg-gradient-secondary {
+  background: #fff;
+  background: linear-gradient(to right bottom, #d8b98b, #e6d1b3);
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: all 1s ease;

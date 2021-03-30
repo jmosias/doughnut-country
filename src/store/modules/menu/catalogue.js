@@ -5,8 +5,13 @@ const state = {
   categories: [
     {
       id: uuidv4(),
-      name: 'Bundles',
+      name: 'Doughnuts',
       icon: 'donuts'
+    },
+    {
+      id: uuidv4(),
+      name: 'Pastries',
+      icon: 'pastry'
     },
     {
       id: uuidv4(),
