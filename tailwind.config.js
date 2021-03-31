@@ -7,6 +7,9 @@ module.exports = {
       head: ['Merienda', 'cursive']
     },
     extend: {
+      fontSize: {
+        '2xs': ['0.625rem', '0.75rem'],
+      },
       colors: {
         'c-primary': '#ffdd91',
         'c-secondary': '#d8b98b',

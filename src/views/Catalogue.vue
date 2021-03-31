@@ -4,13 +4,18 @@
     <div
       class="bg-c-white w-full flex-1 flex flex-col sm:w-auto sm:h-full sm:flex-row"
     >
-      <div class="flex-1"></div>
+      <div class="flex-1">
+        <flavoured-doughnuts
+          v-if="currentCategoryName === 'Doughnuts'"
+        ></flavoured-doughnuts>
+        <category-items v-else></category-items>
+      </div>
       <div class="w-full flex sm:w-auto sm:h-full sm:flex-col">
         <div
           v-for="category in categories"
           :key="category.id"
           @click="changeCurrentCategoryName(category.name)"
-          class="category py-4 px-8 flex-1 flex flex-col justify-center items-center sm:py-8 sm:px-4"
+          class="category py-2 flex-1 flex flex-col justify-center items-center sm:py-0 sm:px-2"
           :class="{
             selected: currentCategoryName == category.name,
             'not-selected': currentCategoryName !== category.name,
@@ -28,7 +33,7 @@
     <nav
       class="bg-gradient-primary w-full py-2 px-8 flex justify-between items-center sm:w-auto sm:h-full sm:py-8 sm:px-4 sm:flex-col sm:justify-start sm:gap-4"
     >
-      <i class="fas fa-bars p-2 sm:cursor-pointer"></i>
+      <i class="fas fa-bars p-2 text-xl sm:cursor-pointer"></i>
       <!-- <p class="text-sm font-head font-bold sm:hidden">Catalogue</p> -->
       <div class="relative p-2 sm:cursor-pointer">
         <svg class="w-8 h-8 fill-current">
@@ -45,6 +50,8 @@
 
 <script>
 import AppIcons from '../components/AppIcons.vue';
+import FlavouredDoughnuts from '../components/catalogue/FlavouredDoughnuts.vue';
+import CategoryItems from '../components/catalogue/CategoryItems.vue';
 import { useStore } from 'vuex';
 import { computed, ref } from 'vue';
 
@@ -52,6 +59,8 @@ export default {
   name: 'Catalogue',
   components: {
     AppIcons,
+    FlavouredDoughnuts,
+    CategoryItems,
   },
   setup() {
     const store = useStore();
